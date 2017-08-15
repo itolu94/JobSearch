@@ -1,0 +1,66 @@
+body{
+	background-image: url('https://newsignature.com/wp-content/uploads/2016/10/money-tech.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	font-size: 20px;
+}
+
+nav{
+	background-color: black;
+    margin-bottom: 55px;
+}
+
+.home {
+	background-color: #a3ffbe;
+	border: solid white 8px;
+}
+.home h2 , .home input[type ="Text"]{
+	color: black;
+}
+
+.home form{
+	width: 40%;
+	display: inline-block;
+}
+
+.jobPosting{
+	border: solid black 2px;
+	background-color: white;
+	margin-bottom: 20px;
+}
+
+.jobPosting span {
+	font-weight: bold;
+}
+
+.jobPosting p {
+	font-size: 25px;
+	margin: 0 0 10px 0;
+	text-decoration: underline;
+}
+
+ul{
+	margin: 0;
+}
+
+.navigation {
+	/*display: inline;*/
+}
+
+
+.navigator form{
+	display: inline-block;
+}
+#next {
+/*	position: relative;
+    bottom: 24px;
+    left: 85px;
+    width: 20%;*/
+    margin:0;
+}
+
+#previous {
+    /*width: 20%;*/
+	margin: 0;
+	/*margin-right: 20px*/
+}
