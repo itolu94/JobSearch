@@ -33,6 +33,10 @@ var jobsSchema = new Schema ({
 	date: {
 		type: Date,
 		default: Date.now
+	},
+	website: {
+		type: String,
+		// required: true
 	}
 })
 

@@ -7,7 +7,7 @@ import Modal from './../components/saved/Modal';
 
 module.exports = (
 			<Route path='/' component={Layout } >
-				<Route path='jobs' component={SearchForm} />
+				<Route path='search' component={SearchForm} />
 				<Route path='listings' component={SearchResults} />
 				<Route path='applied' component={Modal} />
 				<IndexRoute component={SearchForm}/>

@@ -6,31 +6,74 @@ import axios from 'axios';
 class SearchResults extends Component {
 	constructor(props){
 		super(props)
-		this.state = {'job': ['nothing']}
-		this.makeComponent = () => {
-			if (this.state.job[0] !== 'nothing')  {
-				return this.state.job[0].map((post) => {
-					return <Posting post={post} applyToJob={this.applyToJob}/>
-				});
-			}
+		this.state = {
+			job: '',
+			page: 1
 		}
-		this.applyToJob = (listing) => {
-			axios.post('/api', listing).then((data) =>{console.log(data)})
-		}
+		this.makeComponent = this.makeComponent.bind(this);
+		this.applyToJob = this.applyToJob.bind(this);
+		this.getDice = this.getDice.bind(this);
+		this.changePage = this.changePage.bind(this);
 	};
+  makeComponent()  {
+		if (this.state.job !== '')  {
+	 		return this.state.job.map((post) => {
+				return <Posting key={post.detailUrl} website={this.props.website} post={post} applyToJob={this.applyToJob}/>
+			});
+		} 
+	}
+	applyToJob(listing) {
+		axios.post('/api', listing).then((data) =>{console.log(data)})
+	}
+	getDice(){
+		axios.get(`api/dice/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
+		  this.setState({
+				job: resp.data,
+			});
+  	})
+	}
+	getCyberCoders(){
+		axios.get(`api/cyber-coders/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
+		  this.setState({
+				job: resp.data,
+			});
+  	})
+	}
+	changePage(page) {
+	  if(page > 0) {
+			this.setState({page: page});
+		if(this.props.website === 'Dice') {
+			this.getDice();
 
+		} else if (this.props.website === 'CyberCoders') {
+			this.getCyberCoders();
+		}
+	  }
+	}
   componentWillMount() {
-	const url =`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${this.props.job}&pgcnt=7&page=1&state=GA&sort=4`
-	axios.get(url).then((response) => {
-		this.setState({'job': [response.data.resultItemList] });
-	})
+		if(this.props.website === 'Dice') {
+			this.getDice();
+		} else if (this.props.website === 'CyberCoders') {
+			this.getCyberCoders();
+		}
   };
 
 
 	render(){
+		let currentPage = this.state.page;
+		let nextPage = currentPage + 1;
+		let previousPage = currentPage - 1;
 		return (
 			<div className='container'>
+			  <div>
+				<h1 className='center-align page-title'>Listings</h1>
+				<ul className="pagination center-align">
+					<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>				
+				  <li className="active"><a>{currentPage}</a></li>					
+					<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+			  </ul>
 				{this.makeComponent()}
+				</div>
 			</div>
 			);
 	};

@@ -7,15 +7,16 @@ body{
 
 nav{
 	background-color: black;
-    margin-bottom: 55px;
+	margin-bottom: 5%;
 }
 
 .home {
-	background-color: #a3ffbe;
+	background-color: black;
 	border: solid white 8px;
+	margin-top: 3%;
 }
 .home h2 , .home input[type ="Text"]{
-	color: black;
+	color: white;
 }
 
 .home form{
@@ -23,10 +24,15 @@ nav{
 	display: inline-block;
 }
 
+.page-title{
+	color: white;
+}
+
 .jobPosting{
 	border: solid black 2px;
 	background-color: white;
-	margin-bottom: 20px;
+	margin-bottom: 1%;
+	height: 226px;
 }
 
 .jobPosting span {
@@ -37,6 +43,24 @@ nav{
 	font-size: 25px;
 	margin: 0 0 10px 0;
 	text-decoration: underline;
+}
+
+.jobInfo{
+	float: left;
+}
+
+.listingWebsite{
+	float: right;
+	height: 222px;
+}
+
+.applyButtons{
+	margin-top:42px;
+	margin-left: 4px;
+}
+
+.apply {
+	margin-right: 5px;
 }
 
 ul{
