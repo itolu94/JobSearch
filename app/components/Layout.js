@@ -19,15 +19,6 @@ class Layout extends Component {
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 		this.handleStateChange = this.handleStateChange.bind(this);
 	}
-
-	// searchTerm(description, city, state) {
-	// 	this.setState({
-	// 		jobDescription: description,
-	// 		city: city,
-	// 		state: state
-	// 	});
-		
-	// }
 	handleApplied(){
 		hashHistory.push('/applied');
 	}	

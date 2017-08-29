@@ -12,7 +12,7 @@ class SavedJobs extends Component {
 	makeComponentJob(){
 		if(this.props.jobs != 'undefined'){
 			return this.props.jobs.map((savedJob, index) => {
-				return (<Job index={index} deleteJob={this.props.delete} savedJob={savedJob} openModal={this.props.openModal}/>)
+				return (<Job key={savedJob._id} index={index} deleteJob={this.props.delete} savedJob={savedJob} openModal={this.props.openModal}/>)
 			})
 		}
 	}

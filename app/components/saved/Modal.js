@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import SavedJobs from './Savedjobs';
 import Notes from './Notes';
 
-
 const customStyles = {
     content: {
         top: '50%',
@@ -28,6 +27,7 @@ class NotesAndModal extends Component {
             jobs: [],
             notes: [],
             id: '',
+            value: ''
         };
 
         this.openModal = this.openModal.bind(this);
@@ -36,6 +36,7 @@ class NotesAndModal extends Component {
         this.deleteNote = this.deleteNote.bind(this);
         this.deleteJob = this.deleteJob.bind(this);
         this.addNote = this.addNote.bind(this);
+        this.noteText = this.noteText.bind(this);
     }
 
     openModal(id) {
@@ -54,32 +55,55 @@ class NotesAndModal extends Component {
     closeModal() {
         this.setState({ modalIsOpen: false });
     }
-
-    deleteNote(index) {
-        let editNotes = this.state.notes
-        let id = this.state.id
-        editNotes[id].splice(index.index, 1);
-        this.forceUpdate();
-
+    noteText(event) {
+        console.log('function was called');
+        this.setState({value: event.target.value})
     }
 
-    addNote(note, e) {
-        e.preventDefault();
+    deleteNote(index) {
         let editNotes = this.state.notes;
+        let _id = this.state.id;
+        axios.delete('/api/delete-jobs-note', 
+        {params: 
+            {
+                _id: _id,
+                note: this.state.notes[_id]
+            }
+        })
+        .then((data) => {
+          editNotes[_id].splice(index.index, 1);
+          this.forceUpdate();  
+        });
+    }
+
+    addNote(event) {
+        event.preventDefault();
+        let editNotes = this.state.notes;
+        let note = this.state.value;
         let id = this.state.id;
         let data = {
-            id: this.state.id, 
-            note: note
+            id, 
+            note
         }
         axios.put('api/notes', data).then((response) =>{
+            console.log('put was sucessful!!!!');
             editNotes[id].push(note);
+            this.setState({value: ''});
+            // this.forceUpdate();    
+
         });
-            this.forceUpdate();
     }
 
     deleteJob(index){
-        this.state.jobs.splice(index, 1);
-        this.forceUpdate();
+        axios.delete('api/delete-job', {params: {jobId: this.state.jobs[index]._id}})
+        .then((data) =>{
+            this.state.jobs.splice(index, 1);
+            this.forceUpdate();
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
     }
     componentWillMount(){
         let notesObj = {}
@@ -88,13 +112,19 @@ class NotesAndModal extends Component {
             response.data.map((notes) => {
                 notesObj[notes._id] = notes.notes
             });
-        });
+        })
+        .catch((err) => {
+            console.log(err);
+        })
         this.setState({notes: notesObj});    
     }
     render() {
         return (
         	<div> 
-                <SavedJobs delete={this.deleteJob} jobs={this.state.jobs} openModal={this.openModal}/>
+                <SavedJobs 
+                delete={this.deleteJob} 
+                jobs={this.state.jobs} 
+                openModal={this.openModal}/>
         		<div>
             		<Modal isOpen = { this.state.modalIsOpen }
 	            		onAfterOpen ={ this.afterOpenModal }
@@ -103,7 +133,12 @@ class NotesAndModal extends Component {
 			            contentLabel = "Example Modal">
 						<h2 ref={ subtitle => this.subtitle = subtitle }> Notes </h2>
                          <div>
-                             <Notes newNote={this.addNote} deleteNote={this.deleteNote} id={this.state.id} notes={this.state.notes}/>
+                             <Notes value={this.state.value}
+                              noteText={this.noteText} 
+                              newNote={this.addNote} 
+                              deleteNote={this.deleteNote} 
+                              id={this.state.id} 
+                              notes={this.state.notes}/>
                         </div>
             		</Modal> 
             	</div>

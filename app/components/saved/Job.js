@@ -13,9 +13,14 @@ const Job = ({savedJob, openModal, deleteJob, index}) => {
               <li className="url"><span>URL:  </span> <a target='_blank' href={savedJob.link}>Link</a></li>
             </ul>
           <div>
-            <button onClick={() => openModal(savedJob._id)} className="notes">Add Notes</button>
-            <button onClick={() => deleteJob(index)} className="delete">Delete Job</button>
-          </div>
+            <div className='applyButtons'>
+            <button 
+              onClick={() => openModal(savedJob._id)} 
+              className=" waves-effect waves-light btn notes">Add Notes</button>
+              <button onClick={() => deleteJob(index)} 
+              className="waves-effect waves-light btn delete">Delete Job</button>
+            </div>
+            </div>
         </div>
       </div>
     </div>

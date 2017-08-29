@@ -22,12 +22,29 @@ module.exports = (app) => {
 })
 
   app.get('/api', (req, res) => {
-	Jobs.find({}, (err, doc)=>{
+	Jobs.find({},null, {sort:{date: -1}}, (err, doc)=>{
 		if(err) console.log(err) 
 		res.json(doc)
 	})
   });
 
+	app.delete('/api/delete-job' , (req, resp) =>{
+		let {jobId} =  req.query
+		Jobs.find({_id: jobId}).remove((err, results) => {
+			if (err) console.log(err);
+			console.log(results)
+		})
+
+	})
+
+	app.delete('/api/delete-jobs-note', (req, resp) => {
+		let {_id, note} = req.query
+		Jobs.update({_id}, {$pullAll: {notes: note}}, (err, result) =>{
+			if (err) console.log(err);
+			console.log(result);
+		})
+		resp.send('data');
+	})
 
   app.post('/api', (req, res) => {
 	var saveJob = new Jobs ({
@@ -46,7 +63,7 @@ module.exports = (app) => {
 	});
   });
 
-
+  
   app.put('/api/notes', (req, res) => {
 	Jobs.update({_id: req.body.id}, {$addToSet: {notes: req.body.note}}, function(err, doc){
     if (err) console.log(err);
