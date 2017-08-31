@@ -9,32 +9,52 @@ module.exports = (app) => {
   });
 
 
-  app.get('/api/dice/:title/:city/:state/:page', (req, res)=> {
-	listings.getDice(req, (data) =>{
-		res.send(data);
-	})
+  app.get('/api/dice/:title/:city/:state/:page', (req, res) => {
+	  listings.getDice(req, (data) =>{
+		  res.send(data);
+	  })
   })
 
   app.get('/api/cyber-coders/:title/:city/:state/:page', (req, res) => {
-	listings.getCyberCoders(req, (data) => {
-		res.send(data);
-	})
+	  listings.getCyberCoders(req, (data) => {
+		  res.send(data);
+  	})
 })
 
   app.get('/api', (req, res) => {
-	Jobs.find({},null, {sort:{date: -1}}, (err, doc)=>{
-		if(err) console.log(err) 
-		res.json(doc)
-	})
+	  Jobs.find({},null, {sort:{date: -1}}, (err, doc)=>{
+	  	if(err) console.log(err) 
+		  res.json(doc)
+	  })
   });
+
+	app.post('/api/add-job', (req, resp) => {
+		// console.log(req.body.params);
+		let {title, company, location, link, status, source} = req.body.params;
+		var saveJob = new Jobs ({
+		  title,
+		  company,
+		  link,
+		  location,
+		  status
+	});
+	saveJob.save((err, doc)=> {
+		if(err) {
+			console.log(err)
+			resp.send({status: 'failed'});
+		}; 
+		console.log('Was successful')
+		resp.send({status: 'completed'});
+	});
+	})
+
 
 	app.delete('/api/delete-job' , (req, resp) =>{
 		let {jobId} =  req.query
 		Jobs.find({_id: jobId}).remove((err, results) => {
 			if (err) console.log(err);
-			console.log(results)
+			resp.send({status: 'deleted'});
 		})
-
 	})
 
 	app.delete('/api/delete-jobs-note', (req, resp) => {
