@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import SavedJobs from './Savedjobs';
-import ModalContent from './ModelContent';
+import ModalContent from './model-content/ModelContent';
 
 const customStyles = {
     content: {
@@ -29,7 +29,8 @@ export default class ModalAndSavedJobs extends Component {
             notes: [],
             id: '',
             value: '',
-            content: 'notes'
+            content: 'notes',
+            currentJob: ''
         };
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -40,6 +41,7 @@ export default class ModalAndSavedJobs extends Component {
         this.noteText = this.noteText.bind(this);
         this.addJob = this.addJob.bind(this);
         this.getJobs = this.getJobs.bind(this);
+        this.editJob = this.editJob.bind(this);
     }
     openModal(id) {
        this.setState({ 
@@ -95,13 +97,7 @@ export default class ModalAndSavedJobs extends Component {
         });
     }
 
-    addJob(){
-        this.setState({content: 'newJob'});
-        this.openModal();
-    }
-
     getJobs(){
-        console.log('Was successful')
         let notesObj = {};
         axios.get('/api').then((response) =>{
             this.setState({jobs: response.data});
@@ -110,7 +106,19 @@ export default class ModalAndSavedJobs extends Component {
             });
         })
     }
-    
+
+    addJob(){
+        this.setState({content: 'newJob'});
+        this.openModal();
+    }
+
+    editJob(index){
+        this.setState({
+            currentJob: this.state.jobs[index],
+            content: 'edit'
+        })
+        this.openModal();
+    }
     deleteJob(index){
         axios.delete('api/delete-job', {params: {jobId: this.state.jobs[index]._id}})
         .then((data) =>{
@@ -124,7 +132,7 @@ export default class ModalAndSavedJobs extends Component {
     }
     componentWillMount(){
         let notesObj = {}
-        axios.get('/api').then((response) =>{
+        axios.get('/api/saved-jobs').then((response) =>{
             this.setState({jobs: response.data});
             response.data.map((notes) => {
                 notesObj[notes._id] = notes.notes
@@ -144,6 +152,7 @@ export default class ModalAndSavedJobs extends Component {
                 delete={this.deleteJob} 
                 jobs={this.state.jobs} 
                 openModal={this.openModal}
+                editJob={this.editJob}
                 />
         		<div>
             		<Modal isOpen = { this.state.modalIsOpen }
@@ -153,7 +162,8 @@ export default class ModalAndSavedJobs extends Component {
 			            contentLabel = "Modal">
 						<h2 className='center-align' ref={ subtitle => this.subtitle = subtitle }> Notes </h2>
                          <div >
-                             <ModalContent value={this.state.value}
+                             <ModalContent 
+                              value={this.state.value}
                               noteText={this.noteText} 
                               newNote={this.addNote} 
                               deleteNote={this.deleteNote} 
@@ -161,6 +171,7 @@ export default class ModalAndSavedJobs extends Component {
                               notes={this.state.notes}
                               content={this.state.content}
                               getJobs={this.getJobs}
+                              currentJob={this.state.currentJob}
                               />
                         </div>
             		</Modal> 

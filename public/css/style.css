@@ -10,6 +10,10 @@ nav{
 	margin-bottom: 5%;
 }
 
+.login {
+	background: white;
+}
+
 .home {
 	background-color: black;
 	border: solid white 8px;
@@ -66,7 +70,19 @@ nav{
 ul{
 	margin: 0;
 }
+.btn{
+	z-index: 0;
+}
 
+.job{
+	position: relative;
+}
+
+.saved-icon{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
 .navigation {
 	/*display: inline;*/
 }

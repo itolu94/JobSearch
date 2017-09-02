@@ -34,12 +34,12 @@ var jobsSchema = new Schema ({
 		type: Date,
 		default: Date.now
 	},
-	website: {
+	source: {
 		type: String,
 		// required: true
 	}
 })
 
-var Jobs = mongoose.model('Jobs', jobsSchema)
+let Jobs = mongoose.model('Jobs', jobsSchema)
 
 module.exports = Jobs
