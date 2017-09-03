@@ -1,10 +1,8 @@
-'use strict';
-
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 
-var jobsSchema = new Schema ({
+const JobsSchema = new Schema ({
 	title: {
 		type: String,
 		trim: true,
@@ -27,19 +25,22 @@ var jobsSchema = new Schema ({
 		type: String,
 		require: true
 	},
-	notes: {
-		type: [String],
-	},
 	date: {
 		type: Date,
 		default: Date.now
 	},
-	website: {
+	source: {
 		type: String,
 		// required: true
+	},
+	users: {
+		type: [String]
+	},
+	canEdit: {
+		type: Boolean,
+		default: false
 	}
 })
 
-var Jobs = mongoose.model('Jobs', jobsSchema)
-
+const Jobs = mongoose.model('Jobs', JobsSchema)
 module.exports = Jobs

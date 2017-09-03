@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import SavedJobs from './Savedjobs';
-import ModalContent from './ModelContent';
+import ModalContent from './model-content/ModelContent';
 
 const customStyles = {
     content: {
@@ -26,10 +26,12 @@ export default class ModalAndSavedJobs extends Component {
         this.state = {
             modalIsOpen: false,
             jobs: [],
-            notes: [],
+            notes: '',
             id: '',
             value: '',
-            content: 'notes'
+            content: 'notes',
+            currentJob: '',
+            index: ''
         };
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -40,6 +42,8 @@ export default class ModalAndSavedJobs extends Component {
         this.noteText = this.noteText.bind(this);
         this.addJob = this.addJob.bind(this);
         this.getJobs = this.getJobs.bind(this);
+        this.editJob = this.editJob.bind(this);
+        this.setIndex = this.setIndex.bind(this);
     }
     openModal(id) {
        this.setState({ 
@@ -64,44 +68,47 @@ export default class ModalAndSavedJobs extends Component {
         this.setState({value: event.target.value})
     }
 
-    deleteNote(index) {
-        let editNotes = this.state.notes;
+    deleteNote(index ,noteIndex) {
+        console.log(noteIndex);
+        console.log(this.state.notes);
+        let editNotes = this.state.notes[noteIndex].notes;
         let _id = this.state.id;
         axios.delete('/api/delete-jobs-note', 
         {params: 
             {
                 _id: _id,
-                note: this.state.notes[_id]
+                index: noteIndex,
+                note: index
             }
         })
         .then(() => {
-          editNotes[_id].splice(index.index, 1);
+          editNotes.splice(index.index, 1);
           this.forceUpdate();  
         });
     }
-
-    addNote(event) {
+    setIndex(index) {
+        this.setState({
+            index
+        })
+    }
+    addNote(event, index) {
         event.preventDefault();
-        let editNotes = this.state.notes;
+        // let editNotes = this.state.notes;
         let note = this.state.value;
         let id = this.state.id;
         let data = {
-            id, 
+            id,
             note
         }
         axios.put('api/notes', data).then((response) =>{
-            editNotes[id].push(note);
-            this.setState({value: ''});
+            console.log(index);
+            this.state.notes[index].notes.push(note);
+            this.setState({value: ''});            
         });
-    }
 
-    addJob(){
-        this.setState({content: 'newJob'});
-        this.openModal();
     }
 
     getJobs(){
-        console.log('Was successful')
         let notesObj = {};
         axios.get('/api').then((response) =>{
             this.setState({jobs: response.data});
@@ -110,7 +117,19 @@ export default class ModalAndSavedJobs extends Component {
             });
         })
     }
-    
+
+    addJob(){
+        this.setState({content: 'newJob'});
+        this.openModal();
+    }
+
+    editJob(index){
+        this.setState({
+            currentJob: this.state.jobs[index],
+            content: 'edit'
+        })
+        this.openModal();
+    }
     deleteJob(index){
         axios.delete('api/delete-job', {params: {jobId: this.state.jobs[index]._id}})
         .then((data) =>{
@@ -123,17 +142,14 @@ export default class ModalAndSavedJobs extends Component {
 
     }
     componentWillMount(){
-        let notesObj = {}
-        axios.get('/api').then((response) =>{
-            this.setState({jobs: response.data});
-            response.data.map((notes) => {
-                notesObj[notes._id] = notes.notes
+        axios.get('/api/saved-jobs').then((response) =>{
+            this.setState({jobs: response.data.jobs,
+            notes: response.data.notes.notes
             });
         })
         .catch((err) => {
             console.log(err);
         })
-        this.setState({notes: notesObj});    
     }
     render() {
         return (
@@ -144,6 +160,7 @@ export default class ModalAndSavedJobs extends Component {
                 delete={this.deleteJob} 
                 jobs={this.state.jobs} 
                 openModal={this.openModal}
+                editJob={this.editJob}
                 />
         		<div>
             		<Modal isOpen = { this.state.modalIsOpen }
@@ -153,14 +170,17 @@ export default class ModalAndSavedJobs extends Component {
 			            contentLabel = "Modal">
 						<h2 className='center-align' ref={ subtitle => this.subtitle = subtitle }> Notes </h2>
                          <div >
-                             <ModalContent value={this.state.value}
+                             <ModalContent 
+                              value={this.state.value}
                               noteText={this.noteText} 
-                              newNote={this.addNote} 
+                              addNote={this.addNote} 
                               deleteNote={this.deleteNote} 
                               id={this.state.id} 
                               notes={this.state.notes}
                               content={this.state.content}
                               getJobs={this.getJobs}
+                              currentJob={this.state.currentJob}
+                              index = {this.setIndex}
                               />
                         </div>
             		</Modal> 

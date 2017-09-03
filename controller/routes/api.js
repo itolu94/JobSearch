@@ -1,0 +1,85 @@
+  
+const mongoose = require('mongoose');
+const Jobs = mongoose.model('Jobs');
+const Notes = mongoose.model('Notes');
+const listings = require('./../listings.js');
+const jobsHelper = require ('./../jobsHelper');
+const notesHelper = require ('./../notesHelper');
+
+
+module.exports = (app, passport) => {
+  app.get('/api/dice/:title/:city/:state/:page', (req, resp) => {
+	  listings.getDice(req, (data) =>{
+		  resp.send(data);
+	  });
+  });
+
+  app.get('/api/cyber-coders/:title/:city/:state/:page', (req, resp) => {
+	  listings.getCyberCoders(req, (data) => {
+		  resp.send(data);
+  	});
+  });
+
+  app.get('/api/saved-jobs', (req, resp) => {
+    jobsHelper.getSavedJobs(req.user, (err, data) =>{
+      if(err) {
+        console.log(err);
+        resp.json({status: false});
+      }
+      resp.json({status: true});
+    });
+  });
+
+  app.post('/api/add-job', (req, resp) => {
+    jobsHelper.addJob(req.body, req.user, (err) => {
+      if(err) {
+        console.log(err);
+        resp.json({status: false});
+      }
+      resp.json({status: true});
+    });
+  });
+  
+	app.delete('/api/delete-job' , (req, resp) =>{
+    jobsHelper.deleteJob(req.query.jobId, (err) =>{
+      if(err) {
+        console.log(err);
+        resp.json({status: false});
+      }
+      resp.json({status: true});
+    })
+  })
+
+	app.delete('/api/delete-jobs-note', (req, resp) => {
+    notesHelper.deleteNote(req.query, req.user, (err) => {
+      if(err) {
+        console.log(err);
+        resp.json({status: false});
+      }
+      resp.json({status: true});
+    });
+	});
+
+
+
+  
+  app.put('/api/notes', (req, resp) => {
+    notesHelper.addNote(req.body, req.user, (err) => {
+      if(err) {
+        console.log(err);
+        resp.json({status: false});
+      }
+      resp.json({status: true});
+    });
+  });
+}
+
+	// app.put('/api/edit-job', (req, resp) => {
+	// 	let data = req.body
+	// 	console.log(data);
+	// 	Jobs.update({link: data.link}, {$set: data}, (err, result) => {
+	// 		if (err) console.log(err);
+	// 		console.log(result);
+	// 	})
+	// 	resp.send('Recieved');
+  //   });
