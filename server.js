@@ -46,7 +46,9 @@ db.on('error', function(err) {
 });
 
 
-require('./controller/routes.js')(app, passport);
+require('./controller/routes/routes.js')(app, passport);
+require('./controller/routes/api.js')(app, passport);
+
 
 db.once('open', function() {
 	console.log('Housten, we have a connection!');

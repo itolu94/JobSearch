@@ -1,0 +1,25 @@
+const path = require('path');
+
+module.exports = (app, passport) => {
+
+  app.get('/', (req, res) => {
+	  if(req.user) {
+		  res.sendFile(path.resolve(__dirname + './../../public/app.html'));
+	  } else {	
+	  res.sendFile(path.resolve(__dirname + './../../public/login.html'));
+	  }
+  });
+
+  app.post('/login',
+    passport.authenticate('signin', {
+      failureRedirect: '/',
+    }),
+    (req, res) => {
+      return res.redirect('/');
+  });
+	
+  app.get('/signup', (req, res) => {
+	  res.sendFile(path.resolve(__dirname + '/../public/signup.html'));
+  });
+
+}

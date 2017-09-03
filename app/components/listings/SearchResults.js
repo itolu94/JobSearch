@@ -25,7 +25,7 @@ class SearchResults extends Component {
 	applyToJob(listing) {
 		listing.source = this.props.website;
 		console.log(listing);
-		axios.post('/api', listing).then((data) =>{
+		axios.post('/api/add-job', listing).then((data) =>{
 			console.log(data)})
 	}
 	getDice(){
