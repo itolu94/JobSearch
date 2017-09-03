@@ -16,18 +16,21 @@ render(){
 	let content = this.props.content;
 	if(content ===  'notes'){
 	    return(
-				<Notes
-				value={this.props.value}
+		<Notes
+		value={this.props.value}
         noteText={this.props.noteText} 
-        newNote={this.props.addNote} 
+        addNote={this.props.addNote} 
         deleteNote={this.props.deleteNote} 
         id={this.props.id} 
-				notes={this.props.notes}
+		notes={this.props.notes}
+		index={this.props.index}
 				/>
 	  )
 	} else if(content === 'edit') {
-		return(<EditJob currentJob={this.props.currentJob}/>)
-	}
+		return(
+			<EditJob currentJob={this.props.currentJob}/>
+		)
+	} else {
 		return (
 			<div> 
 				 <JobForm 
@@ -36,7 +39,7 @@ render(){
 			</div>
 			
 		)
-	
+	}
   }
 }
 

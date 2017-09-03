@@ -26,11 +26,12 @@ export default class ModalAndSavedJobs extends Component {
         this.state = {
             modalIsOpen: false,
             jobs: [],
-            notes: [],
+            notes: '',
             id: '',
             value: '',
             content: 'notes',
-            currentJob: ''
+            currentJob: '',
+            index: ''
         };
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -42,6 +43,7 @@ export default class ModalAndSavedJobs extends Component {
         this.addJob = this.addJob.bind(this);
         this.getJobs = this.getJobs.bind(this);
         this.editJob = this.editJob.bind(this);
+        this.setIndex = this.setIndex.bind(this);
     }
     openModal(id) {
        this.setState({ 
@@ -66,35 +68,44 @@ export default class ModalAndSavedJobs extends Component {
         this.setState({value: event.target.value})
     }
 
-    deleteNote(index) {
-        let editNotes = this.state.notes;
+    deleteNote(index ,noteIndex) {
+        console.log(noteIndex);
+        console.log(this.state.notes);
+        let editNotes = this.state.notes[noteIndex].notes;
         let _id = this.state.id;
         axios.delete('/api/delete-jobs-note', 
         {params: 
             {
                 _id: _id,
-                note: this.state.notes[_id]
+                index: noteIndex,
+                note: index
             }
         })
         .then(() => {
-          editNotes[_id].splice(index.index, 1);
+          editNotes.splice(index.index, 1);
           this.forceUpdate();  
         });
     }
-
-    addNote(event) {
+    setIndex(index) {
+        this.setState({
+            index
+        })
+    }
+    addNote(event, index) {
         event.preventDefault();
-        let editNotes = this.state.notes;
+        // let editNotes = this.state.notes;
         let note = this.state.value;
         let id = this.state.id;
         let data = {
-            id, 
+            id,
             note
         }
         axios.put('api/notes', data).then((response) =>{
-            editNotes[id].push(note);
-            this.setState({value: ''});
+            console.log(index);
+            this.state.notes[index].notes.push(note);
+            this.setState({value: ''});            
         });
+
     }
 
     getJobs(){
@@ -131,17 +142,14 @@ export default class ModalAndSavedJobs extends Component {
 
     }
     componentWillMount(){
-        let notesObj = {}
         axios.get('/api/saved-jobs').then((response) =>{
-            this.setState({jobs: response.data});
-            response.data.map((notes) => {
-                notesObj[notes._id] = notes.notes
+            this.setState({jobs: response.data.jobs,
+            notes: response.data.notes.notes
             });
         })
         .catch((err) => {
             console.log(err);
         })
-        this.setState({notes: notesObj});    
     }
     render() {
         return (
@@ -165,13 +173,14 @@ export default class ModalAndSavedJobs extends Component {
                              <ModalContent 
                               value={this.state.value}
                               noteText={this.noteText} 
-                              newNote={this.addNote} 
+                              addNote={this.addNote} 
                               deleteNote={this.deleteNote} 
                               id={this.state.id} 
                               notes={this.state.notes}
                               content={this.state.content}
                               getJobs={this.getJobs}
                               currentJob={this.state.currentJob}
+                              index = {this.setIndex}
                               />
                         </div>
             		</Modal> 

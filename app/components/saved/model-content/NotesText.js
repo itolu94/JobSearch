@@ -1,10 +1,11 @@
 import React from 'react';
 
 
-const NotesText = ({notes, index, deleteNote}) => {
+const NotesText = ({notes, index, deleteNote, noteIndex}) => {
 	return (  
 	<div>
-		<p> {index}: {notes}. </p>  <button onClick={() => deleteNote({index})}> Delete </button>
+	{console.log(noteIndex)}
+		<p> {index}: {notes}. </p>  <button onClick={() => deleteNote(index, noteIndex)}> Delete </button>
 	</div>
 	)
 }

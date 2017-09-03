@@ -31,6 +31,9 @@ app.use(passport.session()); // persistent login sessions
 // Load passport strategies
 require('./controller/passport/passport.js')(passport);
 
+require('./model/jobs');
+require('./model/user');
+require('./model/notes');
 
 
 
