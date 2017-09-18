@@ -39,7 +39,7 @@ require('./model/notes');
 
 // establish db connection
 const db = mongoose.connection;
-mongoose.connect(process.env.MONGODB_UR || 'mongodb://localhost/newjobsReactDB');
+mongoose.connect(process.env.MONGODB_URI  || 'mongodb://localhost/newjobsReactDB');
 
 
 db.on('error', function(err) {
