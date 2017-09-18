@@ -57,6 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 
-# ignore bundle file 
-public/bundle.js
 
