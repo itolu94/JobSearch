@@ -28,7 +28,7 @@ module.exports = (app, passport) => {
     helpers.createAccount(req.body, (err) => {
       if (err){ 
         console.log(err);
-        res.send(err);
+        res.redirect('/');        
       }
       res.redirect('/');
     });
