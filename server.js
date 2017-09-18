@@ -39,7 +39,7 @@ require('./model/notes');
 
 // establish db connection
 const db = mongoose.connection;
-mongoose.connect('mongodb://heroku_1v9whhx8:ptddn4qvbucg4bbih374hq1qic@ds145312.mlab.com:45312/heroku_1v9whhx8');
+mongoose.connect(process.env.MONGODB_UR || 'mongodb://localhost/newjobsReactDB');
 
 
 db.on('error', function(err) {

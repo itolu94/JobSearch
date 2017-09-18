@@ -2,7 +2,6 @@ const path = require('path');
 const helpers =  require('./../helpers');
 
 module.exports = (app, passport) => {
-
   app.get('/', (req, res) => {
 	  if(req.user) {
 		  res.sendFile(path.resolve(__dirname + './../../public/app.html'));
@@ -28,9 +27,14 @@ module.exports = (app, passport) => {
     helpers.createAccount(req.body, (err) => {
       if (err){ 
         console.log(err);
-        res.redirect('/');        
+        res.redirect('/signup');        
       }
       res.redirect('/');
     });
+  });
+
+  app.post('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
   });
 }

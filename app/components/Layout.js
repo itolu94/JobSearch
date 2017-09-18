@@ -72,6 +72,7 @@ class Layout extends Component {
 			        <li><a onClick={this.handleDice}>Dice </a></li>
 			        <li><a onClick={this.handleCyberCoders}>CyberCoders</a></li>
 			        <li><a>Monster (Future Feature)</a></li>
+			        <li><a href='/logout'>Logout</a></li>
 			      </ul>
 			    </div>
 			  </nav>
