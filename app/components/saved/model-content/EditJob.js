@@ -12,7 +12,6 @@ export default class EditJob extends Component {
                 location: '',
                 link: '',
                 status: '',
-                source: ''
 	}
     this.handleSubmission = this.handleSubmission.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -24,10 +23,10 @@ export default class EditJob extends Component {
   
   handleSubmission(e){
        e.preventDefault();
-       let {title, company, location, link, status, source} = this.state;
-       let data = {title, company, location, link, status, source}
+       let {title, company, location, status, link} = this.state;
+       let data = {title, company, location,status, link}
         axios.put('/api/edit-job', data).then((data) => {
-            console.log(data);
+            this.props.updateJob();
         });
     }
     componentWillMount(){
@@ -36,16 +35,16 @@ export default class EditJob extends Component {
             title: currentJob.title,
             company: currentJob.company,
             location: currentJob.location,
-            link: currentJob.location,
             link: currentJob.link,
             status: currentJob.status,
-            source: currentJob.source
         });
     }
     render(){
         return (
                <div>
-			  <form onSubmit={(e) => this.handleSubmission(e)}>
+              <form 
+                id='editJob' 
+                onSubmit={(e) => this.handleSubmission(e)}>
                 <input onChange={(e) => this.handleChange('title', e)}
                 value={this.state.title} 
                  type="text" name='title' placeholder='Title' required
@@ -58,18 +57,23 @@ export default class EditJob extends Component {
                 value={this.state.location}
                 type="text" name='Location' placeholder='City, State' required
                 />	
-                <input onChange={(e) => this.handleChange('link', e)}
-                value={this.state.link}
-                type="text" name='link' placeholder='URL Link' required
-                />	
-                <input onChange={(e) => this.handleChange('status', e)}
-                value={this.state.status}                
-                type="text" name='status' placeholder='status' required
-                />	
-                <input onChange={(e) => this.handleChange('source', e)}
-                value={this.state.source}                 
-                type="text" name='source' placeholder='source' required
-                />
+                {
+                //     <input onChange={(e) => this.handleChange('status', e)}
+                // value={this.state.status}                
+                // type="text" name='status' placeholder='status' required
+                // />	
+                }
+                <select 
+                value={this.state.status}
+                onChange={(e) => this.handleChange('status', e)} 
+                name="status"
+                id='jobStatus'
+                >
+                    <option value="Applied"> Applied</option>
+                    <option value="Interested"> Interested</option>
+                    <option value="Waiting"> Waiting</option>
+                    <option value="Accepted"> Accepted</option>
+                </select>
 				<input type='submit' />	
 			  </form>
 			</div>

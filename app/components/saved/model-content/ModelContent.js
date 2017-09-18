@@ -28,7 +28,7 @@ render(){
 	  )
 	} else if(content === 'edit') {
 		return(
-			<EditJob currentJob={this.props.currentJob}/>
+			<EditJob updateJob={this.props.updateJob} currentJob={this.props.currentJob}/>
 		)
 	} else {
 		return (

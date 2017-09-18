@@ -1,11 +1,15 @@
 import React from 'react';
 
 
-const NotesText = ({notes, index, deleteNote, noteIndex}) => {
+const NotesText = ({notes, index, deleteNote}) => {
 	return (  
-	<div>
-	{console.log(noteIndex)}
-		<p> {index}: {notes}. </p>  <button onClick={() => deleteNote(index, noteIndex)}> Delete </button>
+	<div className='note'>
+		<p> {index}: {notes}. </p> 
+		<button onClick={() => deleteNote(index)}
+		className='delete-icon'
+		>
+		  <i className="material-icons">delete</i> <span> Delete </span>
+ 		</button>
 	</div>
 	)
 }

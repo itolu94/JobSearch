@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Modal from './Modal';
 import Job from './Job';
 
 class SavedJobs extends Component {
@@ -10,7 +9,7 @@ class SavedJobs extends Component {
 			}
 	}
 	makeComponentJob(){
-		if(this.props.jobs != 'undefined'){
+		if(this.props.jobs.length > 0){
 			return this.props.jobs.map((savedJob, index) => {
 				return (<Job 
 						editJob={this.props.editJob} 
@@ -22,13 +21,15 @@ class SavedJobs extends Component {
 						/>
 					)
 			})
+		}else {
+			return (<h2 className='center-align'> No Saved Jobs</h2>);
 		}
 	}
 	render(){
 		return(
 				<div className='container'>
 					{this.makeComponentJob()}
-				}
+				
 				</div>
 			)
 	}

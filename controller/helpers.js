@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Notes = mongoose.model('Notes');
 const bcrypt = require('bcrypt');
 
 exports.createAccount = (data, cb) => {
   User.findOne({
     email: data.email,
   }, (err, users) => {
-    if (users) return cb(false);
+    if (users) return cb({err: 'email already registered'});
     bcrypt.hash(data.password, 10, (err, hash) => {
       let newUser = new User({
         email: data.email,
@@ -15,12 +16,10 @@ exports.createAccount = (data, cb) => {
         lastName: data.lastName,
         password: hash
       });
-      newUser.save((err, user) => {
+      newUser.save((err) => {
         if (err) {
-          console.log(err);
-          return cb(false);
+          return cb(err);
         }
-        return cb(true);
       });
     });
   });

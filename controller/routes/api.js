@@ -1,5 +1,5 @@
-  
 const mongoose = require('mongoose');
+const User = mongoose.model('User');
 const Jobs = mongoose.model('Jobs');
 const Notes = mongoose.model('Notes');
 const listings = require('./../listings.js');
@@ -16,17 +16,22 @@ module.exports = (app, passport) => {
 
   app.get('/api/cyber-coders/:title/:city/:state/:page', (req, resp) => {
 	  listings.getCyberCoders(req, (data) => {
+      // console.log(data);
 		  resp.send(data);
   	});
   });
 
   app.get('/api/saved-jobs', (req, resp) => {
     jobsHelper.getSavedJobs(req.user, (err, data) =>{
+      console.log(data);
       if(err) {
         console.log(err);
-        resp.json({status: false});
+        resp.json({
+          status: 'err',
+          err
+        });
       }
-      resp.json({status: true});
+      resp.json({status: data});
     });
   });
 
@@ -72,14 +77,27 @@ module.exports = (app, passport) => {
       resp.json({status: true});
     });
   });
-}
 
-	// app.put('/api/edit-job', (req, resp) => {
-	// 	let data = req.body
-	// 	console.log(data);
-	// 	Jobs.update({link: data.link}, {$set: data}, (err, result) => {
-	// 		if (err) console.log(err);
-	// 		console.log(result);
-	// 	})
-	// 	resp.send('Recieved');
-  //   });
+
+  //TODO, only return users personal information(Name, preference, etc.)
+  app.get('/api/user-info', (req, resp) => {
+  User.findById(req.user)
+    .populate('jobs', 'notes')
+    .exec((err, doc) => {
+      if (err) console.log(err);
+      console.log('user-info return: ')
+      console.log(doc);
+      resp.send(doc);
+    })
+  });
+
+	app.put('/api/edit-job', (req, resp) => {
+		let data = req.body
+		console.log(data);
+		Jobs.update({link: data.link}, {$set: data}, (err, result) => {
+			if (err) console.log(err);
+			console.log(result);
+		})
+		resp.send('Recieved');
+    });
+}

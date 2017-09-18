@@ -23,9 +23,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  jobs: {
-    type: Array
-  }
 });
 
 const User = mongoose.model('User', UserSchema);

@@ -9,7 +9,7 @@ exports.getDice = (req, cb) =>{
 	let state = req.params.state || '';
     let url =`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${title}&pgcnt=7&page=${page}&state=${state}&sort=4`
     axios.get(url).then((response) => {
-		console.log(response.data.resultItemList);		
+		// console.log(response.data.resultItemList);		
 		return cb(response.data.resultItemList);
 	})
 }
@@ -17,7 +17,7 @@ exports.getDice = (req, cb) =>{
 exports.getCyberCoders = (req,cb) =>{
   	let {title, page} = req.params;
 	let state = req.params.state || '';
-	let url = `https://www.cybercoders.com/search/?page=${page}?searchterms=${title}&searchlocation=${state}&newsearch=true&originalsearch=true&sorttype=1`
+	let url = `https://www.cybercoders.com/search/?page=${page}&?searchterms=${title}&searchlocation=${state}&newsearch=true&originalsearch=true&sorttype=1`
 	let results = [];
     request(url, (err, resp, html) => {
 		let $ = cheerio.load(html);
@@ -31,10 +31,12 @@ exports.getCyberCoders = (req,cb) =>{
 				detailUrl: link,
 				location: location,
 				website: 'CyberCoders',
+				company: 'N/A',
 				date: moment().format(' MMM do, YYYY')
 			}
 			results.push(data);
-        });
+		});
+		// console.log(results);
      return(cb(results));   
     });
 }

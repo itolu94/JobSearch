@@ -1,18 +1,14 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 
 var notesSchema = new Schema ({
-    notes: {
-		type: [{
-            jobReference: String,
-            notes: [String]
-        }],
-    },
-    user: {
-        type: String
+    notes: [String],
+    job: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Jobs'
     }
 })
 
