@@ -3,12 +3,13 @@ import Posting from './Posting';
 import axios from 'axios';
 
 
-class SearchResults extends Component {
+export default class SearchResults extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
 			job: '',
-			page: 1
+			page: 1,
+			loading: true
 		}
 		this.makeComponent = this.makeComponent.bind(this);
 		this.applyToJob = this.applyToJob.bind(this);
@@ -24,33 +25,45 @@ class SearchResults extends Component {
 	}
 	applyToJob(listing) {
 		listing.source = this.props.website;
-		console.log(listing);
+		// console.log(listing);
 		axios.post('/api/add-job', listing).then((data) =>{
 			console.log(data)})
 	}
 	getDice(){
+		// console.log(this.state.page);
 		axios.get(`api/dice/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
-		  this.setState({
+			console.log(resp.data);
+			this.setState({
 				job: resp.data,
+				loading: false
 			});
   	})
 	}
 	getCyberCoders(){
 		axios.get(`api/cyber-coders/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
-		  this.setState({
+		  console.log(resp);
+			this.setState({
 				job: resp.data,
+				loading: false
 			});
-  	})
+			console.log(this.state.job);
+  		});
 	}
 	changePage(page) {
-	  if(page > 0) {
-			this.setState({page: page});
-		if(this.props.website === 'Dice') {
-			this.getDice();
 
-		} else if (this.props.website === 'CyberCoders') {
-			this.getCyberCoders();
-		}
+	  if(page > 0) {
+			this.setState({
+				page,
+				loading: true
+			});
+			switch(this.props.website){
+				case 'Dice':
+					this.getDice();
+					break;
+				case 'CyberCoders':
+					this.getCyberCoders();
+					break;
+			}
 	  }
 	}
   componentWillMount() {
@@ -59,27 +72,140 @@ class SearchResults extends Component {
 		} else if (this.props.website === 'CyberCoders') {
 			this.getCyberCoders();
 		}
-  };
-
-
-	render(){
-		let currentPage = this.state.page;
-		let nextPage = currentPage + 1;
-		let previousPage = currentPage - 1;
-		return (
-			<div className='container'>
-			  <div>
-				<h1 className='center-align page-title'>Listings</h1>
-				<ul className="pagination center-align">
-					<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>				
-				  <li className="active"><a>{currentPage}</a></li>					
-					<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
-			  </ul>
-				{this.makeComponent()}
-				</div>
-			</div>
-			);
 	};
-};
+	
+	render(){
+			let loading = this.state.loading;
+			let currentPage = this.state.page;
+			let savedJobs = this.state.job;
+			let nextPage = currentPage + 1;
+			let previousPage = currentPage - 1;
+			{console.log(`currentPage ${currentPage}  nextPage ${nextPage}, previousePage ${previousPage}`)}
+			{/*TODO handle these if else cases in seperate component*/}
+			if(loading){
+				return (
+					<div className='container'>
+						<div>
+							<h1 className='center-align page-title'>Listings</h1>
+							<div className='center-align'> 
+								<img src="images/loading.gif" alt="loading"/>
+							</div>
+						</div>
+					</div>
+				)
+			}
 
-export default SearchResults;
+			else {
+				if(this.props.website === 'CyberCoders'){
+					if (currentPage == 1  && savedJobs.length == 21 ){
+						return( 
+							<div className='container'>
+								<div>
+									<h1 className='center-align page-title'>Listings</h1>
+									<ul className="pagination center-align">
+										<li className="active"><a>{currentPage}</a></li>					
+										<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+									</ul>
+									{this.makeComponent()}
+								</div>
+							</div>
+						)	
+					} else if (currentPage == 1  && savedJobs.length < 21 ){
+						return (
+							<div className='container'>
+							<div>
+								<h1 className='center-align page-title'>Listings</h1>
+								<ul className="pagination center-align">
+									<li className="active"><a>{currentPage}</a></li>					
+								</ul>
+								{this.makeComponent()}
+							</div>
+						</div>
+						)
+					} else if (savedJobs.length < 21) {
+					return (
+							<div className='container'>
+								<div>
+									<h1 className='center-align page-title'>Listings</h1>
+									<ul className="pagination center-align">
+										<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>									
+										<li className="active"><a>{currentPage}</a></li>					
+									</ul>
+									{this.makeComponent()}
+								</div>
+						</div>
+						)
+					}
+					else {
+						return(
+						<div className='container'>
+							<div>
+							<h1 className='center-align page-title'>Listings</h1>
+							<ul className="pagination center-align">
+								<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>				
+								<li className="active"><a>{currentPage}</a></li>					
+								<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+							</ul>
+							{this.makeComponent()}
+							</div>
+						</div>
+						)
+					}
+				} 
+				else {
+				if (currentPage == 1  && savedJobs.length == 7){
+				return( <div className='container'>
+						<div>
+							<h1 className='center-align page-title'>Listings</h1>
+							<ul className="pagination center-align">
+								<li className="active"><a>{currentPage}</a></li>					
+								<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+							</ul>
+							{this.makeComponent()}
+						</div>
+					</div>
+				)
+				}else if (currentPage == 1 && savedJobs.length < 7 ) {
+					return (
+						<div className='container'>
+						<div>
+							<h1 className='center-align page-title'>Listings</h1>
+							<ul className="pagination center-align">
+								<li className="active"><a>{currentPage}</a></li>					
+							</ul>
+							{this.makeComponent()}
+						</div>
+					</div>
+					)
+				} else if (savedJobs.length < 7 ) {
+					return (
+						<div className='container'>
+						<div>
+							<h1 className='center-align page-title'>Listings</h1>
+							<ul className="pagination center-align">
+								<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>									
+								<li className="active"><a>{currentPage}</a></li>					
+							</ul>
+							{this.makeComponent()}
+						</div>
+					</div>
+					)
+				} else {
+					return (
+					<div className='container'>
+						<div>
+						<h1 className='center-align page-title'>Listings</h1>
+						<ul className="pagination center-align">
+							<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>				
+							<li className="active"><a>{currentPage}</a></li>					
+							<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+						</ul>
+						{this.makeComponent()}
+						</div>
+					</div>
+					);
+				}
+			}
+		}
+	}
+}

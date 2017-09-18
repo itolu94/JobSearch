@@ -33,12 +33,17 @@ const JobsSchema = new Schema ({
 		type: String,
 		// required: true
 	},
-	users: {
-		type: [String]
-	},
 	canEdit: {
 		type: Boolean,
 		default: false
+	},
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	notes: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Notes'
 	}
 })
 

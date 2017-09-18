@@ -23,19 +23,19 @@ module.exports = (passport) => {
     });
   }));
 
-    passport.use('signin', new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-  }, (email, password, cb) => {
-    Users.findOne({
-      email,
-    }, (err, user) => {
-      if (err) return cb(err);
-      if (!user) return cb(null, false);
-      if (!checkPassword(password, user.password)) return cb(null, false);
-      return cb(null, user);
-    });
-  }));
+  //   passport.use('sign-up', new LocalStrategy({
+  //   usernameField: 'email',
+  //   passwordField: 'password',
+  // }, (email, password, cb) => {
+  //   Users.findOne({
+  //     email,
+  //   }, (err, user) => {
+  //     if (err) return cb(err);
+  //     if (!user) return cb(null, false);
+  //     if (!checkPassword(password, user.password)) return cb(null, false);
+  //     return cb(null, user);
+  //   });
+  // }));
 
   
   passport.serializeUser((user, cb) => cb(null, user._id));

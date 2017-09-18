@@ -1,19 +1,35 @@
 body{
-	background-image: url('https://newsignature.com/wp-content/uploads/2016/10/money-tech.jpg');
+	/* background-image: url('https://newsignature.com/wp-content/uploads/2016/10/money-tech.jpg'); */
+	background-color: slategrey;
 	background-size: cover;
 	background-attachment: fixed;
 	font-size: 20px;
 }
-
 nav{
 	background-color: black;
 	margin-bottom: 5%;
 }
-
-.login {
-	background: white;
+.nav-mobile li:hover{
+	background: grey;
 }
-
+.login {
+	background: black;
+	padding: 60px 0;
+	border-radius: 30px;
+	border: 3px solid white; 
+}
+.login-buttons{
+	width: 100%;
+	margin: 2% 0;
+	background: white;
+	color: black
+}
+.login-buttons:hover{
+	background: grey;
+}
+input{
+	color: white;
+}
 .home {
 	background-color: black;
 	border: solid white 8px;
@@ -30,6 +46,7 @@ nav{
 
 .page-title{
 	color: white;
+	text-decoration: underline;
 }
 
 .jobPosting{
@@ -48,11 +65,18 @@ nav{
 	margin: 0 0 10px 0;
 	text-decoration: underline;
 }
-
+.jobPosting button {
+	background: black;
+}
+.jobPosting button:hover {
+	background: grey;
+}
 .jobInfo{
 	float: left;
+	width: 60%;
 }
 
+/*TODO EDIT IMAGE to change size based on screen size  */
 .listingWebsite{
 	float: right;
 	height: 222px;
@@ -80,13 +104,44 @@ ul{
 
 .saved-icon{
 	position: absolute;
-	right: 0px;
+	right: 10px;
 	top: 0px;
 }
+
+
+.delete-icon {
+	background: transparent;
+	border: none;
+}
+
+.note{
+	border-bottom: white solid 3px;
+}
+
+.editJob {
+	margin: 0 2%;
+}
+
+#newNoteSubmit{
+	background: black;
+	color: white;
+}
+#jobStatus{
+	display: inline;
+	margin-bottom: 2%;
+}
+#editJob input[type='submit']{
+	background: black;
+	border: black;
+}
+
+select {
+	background-color: lightgrey;
+}
+
 .navigation {
 	/*display: inline;*/
 }
-
 
 .navigator form{
 	display: inline-block;
@@ -104,3 +159,5 @@ ul{
 	margin: 0;
 	/*margin-right: 20px*/
 }
+
+

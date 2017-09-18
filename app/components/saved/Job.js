@@ -13,11 +13,11 @@ let color;
     color = 'yellow';
     break;
   default:
-    color = black;
+    color = 'black';
 }
-  let statusColor = {color: color};
+  let statusColor = {color};
 	return(
-	<div className="row job">
+	  <div className="row job">
         <div className="cl l12">
           <div className="jobPosting">
             <p>{savedJob.title}</p>
@@ -26,21 +26,22 @@ let color;
               <li className="location"><span>Location:  </span> {savedJob.location}</li>
               <li className="url"><span>URL:  </span> <a target='_blank' href={savedJob.link}>Link</a></li>
             </ul>
-          <div>
-          <div className='saved-icon'> 
-            <i style={statusColor} className="material-icons">account_box</i> <span> {savedJob.status} </span>
-          </div> 
-            <div className='applyButtons'>
-            <button 
-              onClick={() => openModal(savedJob._id)} 
-              className=" waves-effect waves-light btn notes">Add Notes</button>
-              <button onClick={() => editJob(index)} 
-              className="waves-effect waves-light btn delete">Edit Job</button>
-              <button onClick={() => deleteJob(index)} 
-              className="waves-effect waves-light btn delete">Delete Job</button>
+            <div>
+              <div className='saved-icon'> 
+                <i style={statusColor} className="material-icons">account_box</i> <span> {savedJob.status} </span>
+              </div> 
+              <div className='applyButtons'>
+                <button 
+                  onClick={() => openModal(savedJob.notes.notes, savedJob._id)} 
+                  className=" waves-effect waves-light btn notes">Add Notes</button>
+                  <button onClick={() => editJob(index)} 
+                  className="waves-effect waves-light btn editJob">Edit Job</button>
+
+                  <button onClick={() => deleteJob(index)} 
+                  className="waves-effect waves-light btn delete">Delete Job</button>
+               </div>
             </div>
-            </div>
-        </div>
+          </div>
       </div>
     </div>
           )

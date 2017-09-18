@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {hashHistory} from 'react-router';
+import axios from 'axios';
 
 
 class Layout extends Component {
@@ -9,7 +10,8 @@ class Layout extends Component {
 			jobDescription: 'javascript',
 			state: 'GA',
 			city: 'Atlanta',
-			website: 'Dice'
+      website: 'Dice',
+      userInformation: ''
 		}
 		// this.searchTerm = this.searchTerm.bind(this);
 		this.handleCyberCoders = this.handleCyberCoders.bind(this);
@@ -28,14 +30,14 @@ class Layout extends Component {
 	handleResults(){
 		hashHistory.push('/listings');
 	}
-	handleDescriptionChange(event) {
-		this.setState({jobDescription: event});
+	handleDescriptionChange(jobDescription) {
+		this.setState({jobDescription});
 	}
-	handleCityChange(event) {
-		this.setState({city: event});
+	handleCityChange(city) {
+		this.setState({city});
 	}
-	handleStateChange(event) {
-		this.setState({state: event});
+	handleStateChange(state) {
+		this.setState({state});
 	}
 	handleDice(){
 		this.setState({website: 'Dice'});
@@ -49,18 +51,24 @@ class Layout extends Component {
 		this.setState({website: 'Monster'});
 		hashHistory.push('/search');		
 	}
+	componentWillMount(){
+		// axios.get('/api/user-info').then((userInformation) => {
+    //   // console.log(data);
+    //   this.setState({userInformation})
+		// });
+	}
 	render() {
 		return(
 			<div>
 				<nav>
 			    <div className="nav-wrapper nav">
 			      <a href='/' className="brand-logo center">JS</a>
-			      <ul id="nav-mobile" className="left hide-on-med-and-down">
+			      <ul  className="nav-mobile left hide-on-med-and-down">
 			        <li onClick={() => this.handleSearch()}><a>Search</a></li>
 			        <li onClick={() => this.handleResults()}><a>Listings</a></li>
 			        <li onClick={() => this.handleApplied()}><a>Applied</a></li>
 			      </ul>      
-			      <ul id="nav-mobile" className="right hide-on-med-and-down">
+			      <ul  className="nav-mobile right hide-on-med-and-down">
 			        <li><a onClick={this.handleDice}>Dice </a></li>
 			        <li><a onClick={this.handleCyberCoders}>CyberCoders</a></li>
 			        <li><a>Monster (Future Feature)</a></li>
@@ -73,10 +81,11 @@ class Layout extends Component {
 					 handleDescriptionChange: this.handleDescriptionChange,
 					 handleCityChange: this.handleCityChange,
 				 	 handleStateChange: this.handleStateChange,
-				     job: this.state.jobDescription,	
+				   job: this.state.jobDescription,	
 					 state: this.state.state,
 					 city: this.state.city,
-					 website: this.state.website
+           website: this.state.website,
+           userInformation: this.state.userInformation
 				 })
 			  }
 			</div>
