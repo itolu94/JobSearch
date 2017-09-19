@@ -124,6 +124,7 @@ ul{
 
 #newNoteSubmit{
 	background: black;
+	border: black;
 	color: white;
 }
 #jobStatus{

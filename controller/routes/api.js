@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Jobs = mongoose.model('Jobs');
 const Notes = mongoose.model('Notes');
-const listings = require('./../listings.js');
+const listings = require('./../listingsHelper.js');
 const jobsHelper = require ('./../jobsHelper');
 const notesHelper = require ('./../notesHelper');
 
@@ -20,6 +20,13 @@ module.exports = (app, passport) => {
 		  resp.send(data);
   	});
   });
+
+  app.get('/api/monster', (req, resp)=> {
+    listings.getMonser(req, (data)=> {
+      console.log(data);
+      resp.send('Request was processed!');
+    })
+  })
 
   app.get('/api/saved-jobs', (req, resp) => {
     jobsHelper.getSavedJobs(req.user, (err, data) =>{

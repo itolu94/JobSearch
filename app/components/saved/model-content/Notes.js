@@ -22,7 +22,7 @@ export default class Notes extends Component {
 		} else {
 			return (
 				<div>
-					<h3 className='center-align'>No notes added</h3>
+					<p className='center-align'>No notes added</p>
 				</div>)
 		}
 	}

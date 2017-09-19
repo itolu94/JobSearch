@@ -12,9 +12,10 @@ const customStyles = {
         bottom: 'auto',
         height: '400px',
         width: '600px',
-        overflowY: 'scroll',
+        border: '4px solid black',
+        overflowY: 'auto',
         marginRight: '-80%',
-        background: 'lightslategrey',
+        background: 'darkgray',
         transform: 'translate(-50%, -50%)'
     }
 };

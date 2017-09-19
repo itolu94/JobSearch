@@ -62,12 +62,12 @@ class Layout extends Component {
 			<div>
 				<nav>
 			    <div className="nav-wrapper nav">
-			      <a href='/' className="brand-logo center">JS</a>
-			      <ul  className="nav-mobile left hide-on-med-and-down">
+			      <ul id='nav-mobile' className="nav-mobile left hide-on-med-and-down">
 			        <li onClick={() => this.handleSearch()}><a>Search</a></li>
 			        <li onClick={() => this.handleResults()}><a>Listings</a></li>
 			        <li onClick={() => this.handleApplied()}><a>Applied</a></li>
-			      </ul>      
+						</ul>      
+			      <a href='/' className="brand-logo center">JS</a>									
 			      <ul  className="nav-mobile right hide-on-med-and-down">
 			        <li><a onClick={this.handleDice}>Dice </a></li>
 			        <li><a onClick={this.handleCyberCoders}>CyberCoders</a></li>

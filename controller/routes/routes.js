@@ -1,5 +1,5 @@
 const path = require('path');
-const helpers =  require('./../helpers');
+const helpers =  require('./../passportHelper');
 
 module.exports = (app, passport) => {
   app.get('/', (req, res) => {
@@ -33,7 +33,7 @@ module.exports = (app, passport) => {
     });
   });
 
-  app.post('/logout', (req, res) => {
+  app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });

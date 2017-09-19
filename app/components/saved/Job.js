@@ -12,6 +12,9 @@ let color;
   case 'Waiting':
     color = 'yellow';
     break;
+  case 'Accepted':
+    color = 'green';
+    break;
   default:
     color = 'black';
 }
