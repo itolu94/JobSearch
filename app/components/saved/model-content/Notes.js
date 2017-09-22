@@ -35,7 +35,8 @@ render(){
 			  </div>
 			  <form onSubmit={(event)  => this.props.addNote(event)}>
 			  	<input onChange={(event) => this.props.noteText(event)}  
-			  	value={this.props.value} 
+				id='notesInput'  
+				value={this.props.value} 
 				type='text' 
 				name='newNote'/>
             <input id='newNoteSubmit' type='submit'/>

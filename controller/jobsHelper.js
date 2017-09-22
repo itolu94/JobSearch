@@ -34,7 +34,8 @@ exports.getSavedJobs = (user, cb) => {
 }
 
 exports.addJob = (jobInfo, user, cb) => {
-  let {source, jobTitle, company, detailUrl, location} = jobInfo;
+  let {source, jobTitle, company, detailUrl, location, status} = jobInfo;
+  console.log(status);
   Jobs.findOne({link: detailUrl, user: user}, (err, job) =>{
     if (err) return cb(err);
 		if(job) {
@@ -49,7 +50,7 @@ exports.addJob = (jobInfo, user, cb) => {
 			let saveJob = new Jobs({
 				title: jobTitle,
         link: detailUrl,
-				status: 'Applied',
+        status,
 				company,
 				location, 
         source, 

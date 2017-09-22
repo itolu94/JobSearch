@@ -23,8 +23,9 @@ export default class SearchResults extends Component {
 			});
 		} 
 	}
-	applyToJob(listing) {
+	applyToJob(listing, status) {
 		listing.source = this.props.website;
+		listing.status = status
 		// console.log(listing);
 		axios.post('/api/add-job', listing).then((data) =>{
 			console.log(data)})
@@ -32,7 +33,7 @@ export default class SearchResults extends Component {
 	getDice(){
 		// console.log(this.state.page);
 		axios.get(`api/dice/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
-			console.log(resp.data);
+			// console.log(resp.data);
 			this.setState({
 				job: resp.data,
 				loading: false
@@ -41,12 +42,12 @@ export default class SearchResults extends Component {
 	}
 	getCyberCoders(){
 		axios.get(`api/cyber-coders/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
-		  console.log(resp);
+		//   console.log(resp);
 			this.setState({
 				job: resp.data,
 				loading: false
 			});
-			console.log(this.state.job);
+			// console.log(this.state.job);
   		});
 	}
 	changePage(page) {
@@ -80,7 +81,7 @@ export default class SearchResults extends Component {
 			let savedJobs = this.state.job;
 			let nextPage = currentPage + 1;
 			let previousPage = currentPage - 1;
-			{console.log(`currentPage ${currentPage}  nextPage ${nextPage}, previousePage ${previousPage}`)}
+			// {console.log(`currentPage ${currentPage}  nextPage ${nextPage}, previousePage ${previousPage}`)}
 			{/*TODO handle these if else cases in seperate component*/}
 			if(loading){
 				return (
@@ -107,6 +108,10 @@ export default class SearchResults extends Component {
 										<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
 									</ul>
 									{this.makeComponent()}
+									<ul className="pagination center-align">
+										<li className="active"><a>{currentPage}</a></li>					
+										<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+									</ul>
 								</div>
 							</div>
 						)	
@@ -119,6 +124,9 @@ export default class SearchResults extends Component {
 									<li className="active"><a>{currentPage}</a></li>					
 								</ul>
 								{this.makeComponent()}
+								<ul className="pagination center-align">
+									<li className="active"><a>{currentPage}</a></li>					
+								</ul>
 							</div>
 						</div>
 						)
@@ -132,6 +140,10 @@ export default class SearchResults extends Component {
 										<li className="active"><a>{currentPage}</a></li>					
 									</ul>
 									{this.makeComponent()}
+									<ul className="pagination center-align">
+										<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>																		
+										<li className="active"><a>{currentPage}</a></li>					
+									</ul>
 								</div>
 						</div>
 						)
@@ -147,6 +159,11 @@ export default class SearchResults extends Component {
 								<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
 							</ul>
 							{this.makeComponent()}
+							<ul className="pagination center-align">
+								<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>				
+								<li className="active"><a>{currentPage}</a></li>					
+								<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+							</ul>
 							</div>
 						</div>
 						)
@@ -162,6 +179,10 @@ export default class SearchResults extends Component {
 								<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
 							</ul>
 							{this.makeComponent()}
+							<ul className="pagination center-align">
+								<li className="active"><a>{currentPage}</a></li>					
+								<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+							</ul>
 						</div>
 					</div>
 				)
@@ -174,6 +195,9 @@ export default class SearchResults extends Component {
 								<li className="active"><a>{currentPage}</a></li>					
 							</ul>
 							{this.makeComponent()}
+							<ul className="pagination center-align">
+								<li className="active"><a>{currentPage}</a></li>					
+							</ul>
 						</div>
 					</div>
 					)
@@ -187,6 +211,10 @@ export default class SearchResults extends Component {
 								<li className="active"><a>{currentPage}</a></li>					
 							</ul>
 							{this.makeComponent()}
+							<ul className="pagination center-align">
+								<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>									
+								<li className="active"><a>{currentPage}</a></li>					
+							</ul>
 						</div>
 					</div>
 					)
@@ -201,6 +229,11 @@ export default class SearchResults extends Component {
 							<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
 						</ul>
 						{this.makeComponent()}
+						<ul className="pagination center-align">
+							<li className="waves-effect"><a onClick={() => this.changePage(previousPage)}>{previousPage}</a></li>				
+							<li className="active"><a>{currentPage}</a></li>					
+							<li className="waves-effect"><a onClick={() => this.changePage(nextPage)}>{nextPage}</a></li>
+						</ul>
 						</div>
 					</div>
 					);

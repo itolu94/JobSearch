@@ -15,7 +15,7 @@ const customStyles = {
         border: '4px solid black',
         overflowY: 'auto',
         marginRight: '-80%',
-        background: 'darkgray',
+        'background-image': 'url(https://images.freecreatives.com/wp-content/uploads/2015/04/natural-paper-background-texture-hd-5a0b.jpg)',
         transform: 'translate(-50%, -50%)'
     }
 };
@@ -132,7 +132,7 @@ export default class ModalAndSavedJobs extends Component {
 
     updateJob(data){
         axios.get('/api/saved-jobs').then((response) => {
-            console.log(response);
+            // console.log(response);
             if(response.data.status === 'err') {
                 console.log(response.data.err);
             }
@@ -158,7 +158,7 @@ export default class ModalAndSavedJobs extends Component {
     }
     componentWillMount() {
         axios.get('/api/saved-jobs').then((response) => {
-            console.log(response);
+            // console.log(response);
             if(response.data.status === 'err') {
                 console.log(response.data.err);
             }

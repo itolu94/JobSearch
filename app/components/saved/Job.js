@@ -7,13 +7,13 @@ let color;
     color = 'red';
     break;
   case 'Interested':
-    color = 'grey';
+    color = 'sandybrown';
     break; 
   case 'Waiting':
     color = 'yellow';
     break;
   case 'Accepted':
-    color = 'green';
+    color = 'yellowgreen';
     break;
   default:
     color = 'black';

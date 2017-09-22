@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Job from './Job';
 
-class SavedJobs extends Component {
+export default class SavedJobs extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -22,17 +22,22 @@ class SavedJobs extends Component {
 					)
 			})
 		}else {
-			return (<h2 className='center-align'> No Saved Jobs</h2>);
+			return (
+				<div className="row job">
+					<div className="cl l12">
+				  		<div className="jobPosting center-align">
+							<p>No Saved Jobs</p>
+				  		</div>
+			  		</div>
+				</div>
+			);
 		}
 	}
 	render(){
 		return(
 				<div className='container'>
 					{this.makeComponentJob()}
-				
 				</div>
 			)
 	}
 }
-
-export default SavedJobs

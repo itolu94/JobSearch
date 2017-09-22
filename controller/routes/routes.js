@@ -28,8 +28,9 @@ module.exports = (app, passport) => {
       if (err){ 
         console.log(err);
         res.redirect('/signup');        
+      }else{
+        res.redirect('/'); 
       }
-      res.redirect('/');
     });
   });
 

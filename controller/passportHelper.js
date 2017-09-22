@@ -20,6 +20,7 @@ exports.createAccount = (data, cb) => {
         if (err) {
           return cb(err);
         }
+        return cb(null);
       });
     });
   });

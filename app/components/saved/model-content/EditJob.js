@@ -46,14 +46,17 @@ export default class EditJob extends Component {
                 id='editJob' 
                 onSubmit={(e) => this.handleSubmission(e)}>
                 <input onChange={(e) => this.handleChange('title', e)}
+                className='modelInput'                
                 value={this.state.title} 
                  type="text" name='title' placeholder='Title' required
                  />	
                 <input onChange={(e) => this.handleChange('company', e)} 
+                className='modelInput'                
                 value={this.state.company}
                 type="text" name='company' placeholder='Company' required
                 />	
                 <input onChange={(e) => this.handleChange('location', e)}
+                className='modelInput'                
                 value={this.state.location}
                 type="text" name='Location' placeholder='City, State' required
                 />	

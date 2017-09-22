@@ -43,26 +43,32 @@ export default class JobForm extends Component {
            	<div>
 			  <form onSubmit={(e) => this.handleSubmission(e)}>
                 <input onChange={(e) => this.handleChange('title', e)}
+                className='modelInput'
                 value={this.state.name} 
                  type="text" name='title' placeholder='Title' required
                  />	
                 <input onChange={(e) => this.handleChange('company', e)} 
+                className='modelInput'                
                 value={this.state.company}
                 type="text" name='company' placeholder='Company' required
                 />	
                 <input onChange={(e) => this.handleChange('location', e)}
+                className='modelInput'                
                 value={this.state.location}
                 type="text" name='Location' placeholder='City, State' required
                 />	
                 <input onChange={(e) => this.handleChange('link', e)}
+                className='modelInput'                
                 value={this.state.link}
                 type="text" name='link' placeholder='URL Link' required
                 />	
                 <input onChange={(e) => this.handleChange('status', e)}
+                className='modelInput'                
                 value={this.state.status}                
                 type="text" name='status' placeholder='status' required
                 />	
                 <input onChange={(e) => this.handleChange('source', e)}
+                className='modelInput'                
                 value={this.state.source}                 
                 type="text" name='source' placeholder='source' required
                 />

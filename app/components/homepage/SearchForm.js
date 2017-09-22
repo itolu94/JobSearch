@@ -17,7 +17,8 @@ export default class SearchForm extends Component {
 		return(
 				<div className="container">
 			      <div className="row login">
-			        <div className="col m6 offset-m3 center-align">
+							<div className="col m8 offset-m2 center-align">
+								<h3 id='loginHeader'> Start your search today! </h3>
 			          <form onSubmit={this.handleSubmit}>
 									<input 
 										onChange={(event) => this.props.handleDescriptionChange(event.target.value)} 
@@ -38,6 +39,14 @@ export default class SearchForm extends Component {
 									  name="city"
 										placeholder="City" 
 									/>
+									<select 
+									id='website'
+									value={this.props.website}
+									onChange={this.props.handle}
+									> 
+										<option value='Dice'> Dice</option>
+										<option value='CyberCoders'> CyberCoders</option>
+									</select> 
 			            <input className='login-buttons' type="submit" />
 			          </form>
 			        </div>
