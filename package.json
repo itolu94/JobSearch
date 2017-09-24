@@ -17,6 +17,7 @@
     "connect-redis": "^3.3.0",
     "express": "^4.15.3",
     "express-session": "^1.15.5",
+    "madison": "^1.0.2",
     "moment": "^2.18.1",
     "mongoose": "^4.11.1",
     "morgan": "^1.8.2",
@@ -28,7 +29,8 @@
     "react-modal": "^2.2.1",
     "react-router": "^2.4.1",
     "request": "^2.81.0",
-    "state-cities": "^1.0.5"
+    "state-cities": "^1.0.5",
+    "us": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

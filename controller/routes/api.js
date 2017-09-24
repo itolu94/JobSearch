@@ -8,14 +8,14 @@ const notesHelper = require ('./../notesHelper');
 
 
 module.exports = (app, passport) => {
-  app.get('/api/dice/:title/:city/:state/:page', (req, resp) => {
-	  listings.getDice(req, (data) =>{
-		  resp.send(data);
-	  });
+  app.get('/api/dice', (req, resp) => {
+      listings.getDice(req.query, (data) =>{
+        resp.send(data);
+      });
   });
 
-  app.get('/api/cyber-coders/:title/:city/:state/:page', (req, resp) => {
-	  listings.getCyberCoders(req, (data) => {
+  app.get('/api/cyber-coders', (req, resp) => {
+	  listings.getCyberCoders(req.query, (data) => {
       // console.log(data);
 		  resp.send(data);
   	});

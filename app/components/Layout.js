@@ -7,15 +7,16 @@ class Layout extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			jobDescription: 'javascript',
-			state: 'GA',
+			jobDescription: 'Javascript',
+			state: 'Georgia',
 			city: 'Atlanta',
-      website: 'Dice',
+      		website: 'Dice',
 		}
 		// this.searchTerm = this.searchTerm.bind(this);
 		this.handleCityChange = this.handleCityChange.bind(this);
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 		this.handleStateChange = this.handleStateChange.bind(this);
+		this.handleWebsiteChange = this.handleWebsiteChange.bind(this);
 	}
 	handleApplied(){
 		hashHistory.push('/applied');
@@ -45,18 +46,18 @@ class Layout extends Component {
 		return(
 			<div>
 				<nav>
-			    <div className="nav-wrapper nav">
-			      <ul id='nav-mobile' className="nav-mobile left hide-on-med-and-down">
-			        <li onClick={() => this.handleSearch()}><a>Search</a></li>
-			        <li onClick={() => this.handleResults()}><a>Listings</a></li>
-			        <li onClick={() => this.handleApplied()}><a>Applied</a></li>
+			   		<div className="nav-wrapper nav">
+			      		<ul id='nav-mobile' className="nav-mobile left hide-on-med-and-down">
+							<li onClick={() => this.handleSearch()}><a>Search</a></li>
+							<li onClick={() => this.handleResults()}><a>Listings</a></li>
+							<li onClick={() => this.handleApplied()}><a>Applied</a></li>
 						</ul>      
 						<a href='/' className="brand-logo center">JS</a>		
 						<ul  className="nav-mobile right hide-on-med-and-down">
 							<li><a href='/logout'>Logout</a></li>
 						</ul>							
-			    </div>
-			  </nav>
+			    	</div>
+			  	</nav>
 			  {
 					React.cloneElement(this.props.children,  
 			   { 
@@ -64,10 +65,10 @@ class Layout extends Component {
 					 handleCityChange: this.handleCityChange,
 					 handleStateChange: this.handleStateChange,
 					 handleWebsiteChange: this.handleWebsiteChange,
-				   job: this.state.jobDescription,	
+				   	 job: this.state.jobDescription,	
 					 state: this.state.state,
 					 city: this.state.city,
-           website: this.state.website,
+           			website: this.state.website,
 				 })
 			  }
 			</div>

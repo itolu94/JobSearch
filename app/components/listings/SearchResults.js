@@ -31,24 +31,46 @@ export default class SearchResults extends Component {
 			console.log(data)})
 	}
 	getDice(){
-		// console.log(this.state.page);
-		axios.get(`api/dice/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
-			// console.log(resp.data);
+	  axios.get('api/dice',
+	   {params:
+			{
+				title: this.props.job,
+				city: this.props.city,
+				state: this.props.state,
+				page: this.state.page
+	   		}
+	   }).then((resp)=> {
 			this.setState({
 				job: resp.data,
 				loading: false
 			});
-  	})
+	   })
 	}
 	getCyberCoders(){
-		axios.get(`api/cyber-coders/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
-		//   console.log(resp);
+		// axios.get(`api/cyber-coders/${this.props.job}/${this.props.city}/${this.props.state}/${this.state.page}`).then((resp) => {
+		// //   console.log(resp);
+		// 	this.setState({
+		// 		job: resp.data,
+		// 		loading: false
+		// 	});
+		// 	// console.log(this.state.job);
+		//   });
+		  axios.get(`api/cyber-coders`, 
+		  {params: 
+			{
+				title:this.props.job,
+				city: this.props.city,
+				state: this.props.state,
+				page: this.state.page
+		  }
+		})
+		.then((resp) => {
 			this.setState({
-				job: resp.data,
-				loading: false
-			});
-			// console.log(this.state.job);
-  		});
+					job: resp.data,
+					loading: false
+				});
+				// console.log(this.state.job);
+		   });
 	}
 	changePage(page) {
 
