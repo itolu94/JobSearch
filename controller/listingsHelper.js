@@ -46,31 +46,34 @@ exports.getCyberCoders = (req,cb) =>{
 
 
 exports.getZipRecruiter = (req, cb) => {
-  let {title, page, state, city} = req.params || '';
-//   let url = `https://www.monster.com/jobs/search/?q=${title}&where=${city}__2C-${state}&intcid=skr_navigation_nhpso_searchMain&sort=dt.rv.di&page=${page}`
-  let url = `https://www.monster.com/jobs/search/?q=Javascript&where=Cary__2C-NC&intcid=skr_navigation_nhpso_searchMain&sort=dt.rv.di&page=1`
-  
-  let results = [];
-  request(url, (err, resp, html) => {
-		let $ = cheerio.load(html);
-		$('#resultsWrapper').each((i, listing) => {
-			console.log(i);
-			// let parent = $(listing).children('.job-details-container');
-			// let title = parent.children('.job-title').text().trim();
-			// let link = `https://www.cybercoders.com/${parent.children('.job-title').children('a').attr('href')}`
-			// let location = parent.children('.details').children('.location').text().trim();
-			// let data = {
-			// 	jobTitle: title,
-			// 	detailUrl: link,
-			// 	location: location,
-			// 	website: 'CyberCoders',
-			// 	company: 'N/A',
-			// 	date: moment().format(' MMM do, YYYY')
-			// }
-			results.push(i);
-		});
-		// console.log(results);
-		return cb(results);
-    });
-	
+  	let {title, page, state, city} = req || '';
+	madison.getStateAbbrev(state, (abbrev)=> {
+		let url = `https://www.ziprecruiter.com/candidate/search?search=${title}&location=${city}%2C+${state}&page=${page}`  
+		// console.log(url);
+		let results = [];
+		request(url, (err, resp, html) => {
+				let $ = cheerio.load(html);
+				$('.job_content').each((i, listing) => {
+					// console.log('title: ' + $(listing).children('.t_job_link').children('.job_title').text().trim());
+					// console.log('location: ' + $(listing).children('.job_org').children().last().text().trim());
+					// console.log('link: ' + $(listing).children('.t_job_link').attr('href'));
+					// let parent = $(listing).children('.job-details-container');
+					let jobTitle = $(listing).children('.t_job_link').children('.job_title').text().trim();
+					let detailUrl = $(listing).children('.t_job_link').attr('href')
+					let location = $(listing).children('.job_org').children().last().text().trim()
+					let company = $(listing).children('.job_org').children().first().text().trim()
+					let data = {
+						jobTitle,
+						detailUrl,
+						location,
+						company,
+						website: 'Zip Recruiter',
+						date: moment().format(' MMM do, YYYY')
+					}
+					results.push(data);
+				});
+				// console.log(results.length);
+				return cb(results);
+			});
+	});
 }

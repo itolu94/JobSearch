@@ -57,20 +57,17 @@ export default class SearchForm extends Component {
 											<option value='Invalid State' />											
 										</datalist>
 									</input>
-									
 									<input
 									onChange={(e) => this.props.handleCityChange(e.target.value)}
 									list='cities'
 									name='cities'
 									placeholder='City'
 									value={this.props.city}
-									
 									>									
 										<datalist id='cities'>
 											{this.fillCities()}
 										</datalist>
 									</input>
-
 									<select 
 									  id='website'
 									  value={this.props.website}
@@ -78,6 +75,7 @@ export default class SearchForm extends Component {
 									> 
 										<option value='Dice'> Dice</option>
 										<option value='CyberCoders'> CyberCoders</option>
+										<option value='ZipRecruiter'> ZipRecruiter</option>
 									</select> 
 			            <input className='login-buttons' type="submit" />
 			          </form>

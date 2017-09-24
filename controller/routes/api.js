@@ -21,12 +21,18 @@ module.exports = (app, passport) => {
   	});
   });
 
-  app.get('/api/monster', (req, resp)=> {
-    listings.getMonser(req, (data)=> {
-      console.log(data);
-      resp.send('Request was processed!');
-    })
-  })
+  // app.get('/api/monster', (req, resp)=> {
+  //   listings.getMonser(req, (data)=> {
+  //     console.log(data);
+  //   })
+  // })
+
+  app.get('/api/zip-recruiter', (req, resp) => {
+    listings.getZipRecruiter(req.query, (data) => {
+      // console.log(data)
+      resp.send(data);
+    });
+  });
 
   app.get('/api/saved-jobs', (req, resp) => {
     jobsHelper.getSavedJobs(req.user, (err, data) =>{
