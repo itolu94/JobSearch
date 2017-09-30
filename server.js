@@ -30,7 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 // Load passport strategies
 require('./controller/passport/passport.js')(passport, PORT);
-// require('./controller/passport/passport-facebook')(passport, PORT);
 
 require('./model/jobs');
 require('./model/user');
