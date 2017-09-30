@@ -54,10 +54,6 @@ exports.getZipRecruiter = (req, cb) => {
 		request(url, (err, resp, html) => {
 				let $ = cheerio.load(html);
 				$('.job_content').each((i, listing) => {
-					// console.log('title: ' + $(listing).children('.t_job_link').children('.job_title').text().trim());
-					// console.log('location: ' + $(listing).children('.job_org').children().last().text().trim());
-					// console.log('link: ' + $(listing).children('.t_job_link').attr('href'));
-					// let parent = $(listing).children('.job-details-container');
 					let jobTitle = $(listing).children('.t_job_link').children('.job_title').text().trim();
 					let detailUrl = $(listing).children('.t_job_link').attr('href')
 					let location = $(listing).children('.job_org').children().last().text().trim()

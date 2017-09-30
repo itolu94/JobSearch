@@ -1,6 +1,7 @@
 body{
 	background-image: url('https://thump-images.vice.com/images/2016/12/15/4chan-trolls-diy-spaces-oakland-fire-body-image-1481820674.jpg');
 	background-size: cover;
+	background-position: center;
 	background-attachment: fixed;
 	font-size: 20px;
 }
@@ -85,10 +86,11 @@ input{
 .pagination li.active{
 	background-color: black;
 }
-/*TODO EDIT IMAGE to change size based on screen size  */
-.listingWebsite{
-	float: right;
-	height: 222px;
+
+.listingImg{
+	width: 25%;
+	align-content: center;
+
 }
 
 .applyButtons{
@@ -157,6 +159,10 @@ ul{
 	border: black;
 	color: white;
 }
+#notesInput{
+	color: black;
+}
+
 #jobStatus{
 	display: inline;
 	margin-bottom: 4%;
