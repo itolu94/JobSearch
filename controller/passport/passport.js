@@ -5,6 +5,7 @@ const passportHelper = require('../passportHelper');
 const Strategy = require('passport-facebook').Strategy;
 
 
+
 module.exports = (passport, port) => {
     const checkPassword = (password, savedPassword) => {
         return bcrypt.compareSync(password, savedPassword, (err, result) => {
@@ -29,7 +30,7 @@ module.exports = (passport, port) => {
     passport.use('facebook', new Strategy({
             clientID: '1871471559835158',
             clientSecret: '74c218b580baf18eae1b6cbe72d127e6',
-            callbackURL: `https://developerjobsearch.herokuapp.com//facebook/login/return`
+            callbackURL: `https://developerjobsearch.herokuapp.com/facebook/login/return`
         },
         function (accessToken, refreshToken, profile, cb) {
             if (profile) {
