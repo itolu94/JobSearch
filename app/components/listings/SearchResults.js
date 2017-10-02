@@ -134,7 +134,7 @@ export default class SearchResults extends Component {
                 <div className='container'>
                     <div>
                         <div className='center-align'>
-                            {/*<img src="images/loading.gif" alt="loading"/>*/}
+                            <img src="images/loading.gif" alt="loading"/>
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@ export default class SearchResults extends Component {
             <div className='container'>
                 <h1 className='center-align page-title'>Listings</h1>
                 <div className='center-align'>
-                    <img src={imgSrc} className='center-align listingImg' alt=""/>
+                    {/*<img src={imgSrc} className='center-align listingImg' alt=""/>*/}
                 </div>
                 {this.displayListings()}
             </div>
