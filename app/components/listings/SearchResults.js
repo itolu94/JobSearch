@@ -134,7 +134,7 @@ export default class SearchResults extends Component {
                 <div className='container'>
                     <div>
                         <div className='center-align'>
-                            <img src="images/loading.gif" alt="loading"/>
+                            {/*<img src="images/loading.gif" alt="loading"/>*/}
                         </div>
                     </div>
                 </div>
