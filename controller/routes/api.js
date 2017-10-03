@@ -35,8 +35,8 @@ module.exports = (app, passport) => {
   });
 
   app.get('/api/saved-jobs', (req, resp) => {
-    jobsHelper.getSavedJobs(req.user, (err, data) =>{
-      console.log(data);
+      console.log(req.query);
+      jobsHelper.getSavedJobs(req.user, req.query.organizeBy || "Data", (err, data) =>{
       if(err) {
         console.log(err);
         resp.json({

@@ -5,10 +5,9 @@
     <title>Job Search</title>
     <!-- Compiled and minified CSS -->
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
@@ -16,11 +15,12 @@
     <!--Materialize icons  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./images/brief-case.png">
 
     <!--materialize icon link-->
-    <link rel='stylesheet'  href='./css/materialize-social.css'>
+    <link rel='stylesheet' href='./css/materialize-social.css'>
+    <link rel="stylesheet" href="./css/style.css">
+
 </head>
 <body>
 <nav>
@@ -33,12 +33,12 @@
         <div class="  col s6 offset-s3 center-align">
             <h3 id='loginHeader'> Login </h3>
             <form method='POST' action="/login">
-                <input type="text" placeholder="Email" name='email'>
+                <input class='' type="text" placeholder="Email" name='email'>
                 <input type="password" placeholder="Password" name='password'>
                 <button class='waves-effect waves-light btn login-buttons' type="submit"> Log-In</button>
                 <br>
                 <button class="waves-effect waves-light btn login-buttons">
-                    <a style='color: black' href="/signup">Sign Up</a>
+                    <a style='' href="/signup">Sign Up</a>
                 </button>
             </form>
             <!--TODO add facebook login link-->

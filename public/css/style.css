@@ -8,7 +8,7 @@ body{
 }
 nav{
 	background-color: black;
-	margin-bottom: 5%;
+	margin-bottom: 2%;
 }
 .nav-mobile li:hover{
 	background: grey;
@@ -64,13 +64,15 @@ input{
 }
 
 .jobPosting span {
-	font-weight: bold;
+    font-family: 'Fjalla One', sans-serif;
+
 }
 
 .jobPosting p {
 	font-size: 25px;
 	margin: 0 0 10px 0;
 	text-decoration: underline;
+    width: 90%;
 }
 .jobPosting button {
 	background: black;
@@ -94,16 +96,32 @@ input{
 
 }
 
-.applyButtons{
-	margin-top: 42px;
-
+.applyButtons {
+    margin-top: 42px;
+    margin-left: 40px;
+    margin-bottom: 13px;
 }
 
 .interestedButtons{
-	margin-top:42px;
-	margin-left: 40px;
-	margin-bottom: 13px;
+    margin-top:42px;
 }
+
+
+
+
+
+input[type=text]:not(.browser-default):focus:not([readonly]){
+     border-bottom: 1px solid white;
+     -webkit-box-shadow: 0 1px 0 0 white;
+     box-shadow: 0 1px 0 0 white;
+ }
+
+input:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid white;
+    -webkit-box-shadow: 0 1px 0 0 white;
+    box-shadow: 0 1px 0 0 white;
+}
+
 
 
 ul{
@@ -180,6 +198,19 @@ ul{
     height: 31px;
     font-size: 16px;
 }
+
+#organizer{
+    display: inline;
+    margin-bottom: 2%;
+    height: 31px;
+    font-size: 16px;
+}
+.organizerDiv{
+    margin-left: 38%;
+    margin-bottom: 10px;
+    width: 25%;
+}
+
 #editJob input[type='submit']{
 	background: black;
 	border: black;
@@ -210,5 +241,75 @@ select {
 	margin: 0;
 	/*margin-right: 20px*/
 }
+
+
+@media only screen and (max-width:1940px){
+    .applyButtons {
+        margin-top: 42px;
+        margin-left: 40px;
+        margin-bottom: 13px;
+    }
+    .interestedButtons{
+        margin-top: 42px;
+        margin-left: 80px;
+    }
+}
+
+@media only screen and (max-width:1577px){
+    .interestedButtons{
+        margin-top: 42px;
+        margin-left: 125px;
+    }
+}
+
+@media only screen and (max-width:1000px){
+    .jobPosting p {
+        font-size: 20px;
+        margin: 0 0 10px 0;
+        text-decoration: underline;
+        width: 80%;
+    }
+
+    .jobPosting span {
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width:616px){
+    .interestedButtons{
+        margin-top: 42px;
+        margin-bottom: 15px;
+        margin-left: 0px;
+
+    }
+
+    .applyButtons {
+        margin-top: 42px;
+        margin-left: 0px;
+        margin-bottom: 13px;
+    }
+
+    .applyDiv{
+        height: 50px;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .notes{
+         width: 100%;
+         margin-bottom: 10px;
+     }
+    .editJob{
+        width: 100%;
+        margin:0 0 10px 0;
+
+    }
+
+    .delete{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+
 
 

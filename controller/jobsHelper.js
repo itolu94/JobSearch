@@ -4,12 +4,23 @@ const Jobs = mongoose.model('Jobs');
 const Notes = mongoose.model('Notes');
 
 
-exports.getSavedJobs = (user, cb) => {
-    Jobs.find({user: user}, null, {sort: {date: -1}}).populate('notes').exec((err, jobs) => {
-        if (err) return cb(err, null);
-        // console.log(jobs);
-        return cb(null, jobs);
-    });
+exports.getSavedJobs = (user, organizeBy, cb) => {
+    if(organizeBy == 'Status'){
+        Jobs.find({user: user}, null, {sort: {status: 1}}).populate('notes').exec((err, jobs) => {
+            if (err) return cb(err, null);
+            return cb(null, jobs);
+        });
+    } else if (organizeBy == 'Title'){
+        Jobs.find({user: user}, null, {sort: {title: 1}}).populate('notes').exec((err, jobs) => {
+            if (err) return cb(err, null);
+            return cb(null, jobs);
+        });
+    } else {
+        Jobs.find({user: user}, null, {sort: {date: -1}}).populate('notes').exec((err, jobs) => {
+            if (err) return cb(err, null);
+            return cb(null, jobs);
+        });
+    }
 }
 
 exports.addJob = (jobInfo, user, cb) => {

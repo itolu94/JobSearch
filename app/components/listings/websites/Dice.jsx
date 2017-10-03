@@ -16,6 +16,7 @@ export default class Dice extends Component {
             });
         }
     }
+
     render(){
         let loading = this.props.loading;
         let currentPage = this.props.page;

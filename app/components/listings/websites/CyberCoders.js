@@ -65,6 +65,7 @@ export default class CyberCoders extends Component
                             <li className="waves-effect"><a
                                 onClick={() => this.props.changePage(previousPage)}>{previousPage}</a></li>
                             <li className="active"><a>{currentPage}</a></li>
+                            <button></button>
                         </ul>
                         {this.makeComponent()}
                         <ul className="pagination center-align">
