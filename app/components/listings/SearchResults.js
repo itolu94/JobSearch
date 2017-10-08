@@ -179,15 +179,15 @@ export default class SearchResults extends Component {
     }
 
     render() {
-        let website = this.props.website;
-        let imgSrc;
-        if (website === 'ZipRecruiter') {
-            imgSrc = './images/ZipRecruiter.png';
-        } else if (website === "Dice") {
-            imgSrc = './images/DiceLogo.jpg';
-        } else if (website === "CyberCoders") {
-            imgSrc = './images/CyberCodersLogo.png';
-        }
+        // let website = this.props.website;
+        // let imgSrc;
+        // if (website === 'ZipRecruiter') {
+        //     imgSrc = './images/ZipRecruiter.png';
+        // } else if (website === "Dice") {
+        //     imgSrc = './images/DiceLogo.jpg';
+        // } else if (website === "CyberCoders") {
+        //     imgSrc = './images/CyberCodersLogo.png';
+        // }
         return (
             <div className='container'>
                 <h1 className='center-align page-title'>Listings</h1>

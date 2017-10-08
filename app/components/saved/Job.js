@@ -34,7 +34,7 @@ let color;
             </ul>
             <div>
               <div className='saved-icon'> 
-                <i style={statusColor} className="material-icons">account_box</i> <span> {savedJob.status} </span>
+                <i style={statusColor} className="material-icons iconAlign">account_box</i> <span> {savedJob.status} </span>
               </div> 
               <div className='applyButtons'>
                 <button 

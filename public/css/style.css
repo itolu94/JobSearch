@@ -16,6 +16,7 @@ nav{
 .login {
 	background: black;
 	padding-bottom: 60px;
+	margin-top: 7%;
 	padding-top: 25;
 	border-radius: 30px;
 	border: 3px solid white; 
@@ -58,13 +59,14 @@ input{
 
 .jobPosting{
 	border: solid black 2px;
-	background-color: white;
+	background-color: #444;
 	margin-bottom: 1%;
 	height: fit-content;
 }
 
 .jobPosting span {
     font-family: 'Fjalla One', sans-serif;
+	color: white;
 
 }
 
@@ -73,8 +75,9 @@ input{
 	margin: 0 0 10px 0;
 	text-decoration: underline;
     width: 90%;
-
+	color: white;
 }
+
 .jobPosting button {
 	background: black;
 }
@@ -152,6 +155,12 @@ ul{
 	position: absolute;
 	right: 10px;
 	top: 0px;
+}
+
+.iconAlign{
+	position: absolute;
+	left: -29px;
+	top: 4px;
 }
 
 
