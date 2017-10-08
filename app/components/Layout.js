@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {hashHistory} from 'react-router';
-import axios from 'axios';
-
+import $ from 'jquery';
+import {SideNav, SideNavItem, Button} from 'react-materialize';
 
 class Layout extends Component {
     constructor(props) {
@@ -47,6 +47,10 @@ class Layout extends Component {
         this.setState({website});
     }
 
+    sideBar() {
+        document.getElementsByClassName("button-collapse").sideNav();
+    }
+
     componentWillMount() {
 
     }
@@ -61,11 +65,27 @@ class Layout extends Component {
                             <li onClick={() => this.handleResults()}><a>Listings</a></li>
                             <li onClick={() => this.handleApplied()}><a>Applied</a></li>
                         </ul>
+                        <div className="sideNav">
+                            <SideNav trigger={<button className="sideNavButton">Navigation</button>}
+                                     options={{closeOnClick: true}}>
+                                <SideNavItem>
+                                    <li onClick={() => this.handleSearch()}><a>Search</a></li>
+                                </SideNavItem>
+                                <SideNavItem>
+                                    <li onClick={() => this.handleResults()}><a>Listings</a></li>
+                                </SideNavItem>
+                                <SideNavItem>
+                                    <li onClick={() => this.handleApplied()}><a>Applied</a></li>
+                                </SideNavItem>
+                            </SideNav>
+                        </div>
                         <a href='/' className="brand-logo center">JS</a>
                         <ul className="nav-mobile right hide-on-med-and-down">
                             <li><a href='/logout'>Logout</a></li>
                         </ul>
                     </div>
+                    {/*Testing materialize sid bar*/}
+
                 </nav>
                 {
                     React.cloneElement(this.props.children,

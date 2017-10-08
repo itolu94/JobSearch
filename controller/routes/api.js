@@ -21,11 +21,6 @@ module.exports = (app, passport) => {
   	});
   });
 
-  // app.get('/api/monster', (req, resp)=> {
-  //   listings.getMonser(req, (data)=> {
-  //     console.log(data);
-  //   })
-  // })
 
   app.get('/api/zip-recruiter', (req, resp) => {
     listings.getZipRecruiter(req.query, (data) => {
@@ -35,16 +30,15 @@ module.exports = (app, passport) => {
   });
 
   app.get('/api/saved-jobs', (req, resp) => {
-      console.log(req.query);
-      jobsHelper.getSavedJobs(req.user, req.query.organizeBy || "Data", (err, data) =>{
-      if(err) {
+      jobsHelper.getSavedJobs(req.user, req.query.organizeBy || "Date", req.query.page = 1, (err, data) =>{
+        if(err) {
         console.log(err);
         resp.json({
           status: 'err',
           err
         });
       }
-      resp.json({status: data});
+      resp.json({status: data, morePages: data.morePages});
     });
   });
 

@@ -13,12 +13,10 @@ const Posting = ({post, applyToJob, website}) => {
                             <li className="url"><span>URL:  </span> <a target='_blank' href={post.detailUrl}>Link</a>
                             </li>
                         </ul>
-                        <div className='col m1 s12 applyDiv'>
+                        <div className='col  s12 applyDiv'>
                             <button className='waves-effect waves-light btn apply applyButtons'
                                     onClick={() => applyToJob(post, 'Applied')}>Apply
                             </button>
-                        </div>
-                        <div className='col m1  s12  '>
                             <button className="waves-effect waves-light btn interestedButtons"
                                     onClick={() => applyToJob(post, 'Interested')}>Interested
                             </button>

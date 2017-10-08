@@ -82,7 +82,9 @@ input{
 }
 .jobInfo{
 }
-
+.applyDiv{
+	height: auto;
+}
 .pagination{
 	margin-bottom: 30px;
 }
@@ -97,13 +99,12 @@ input{
 }
 
 .applyButtons {
-    margin-top: 42px;
-    margin-left: 40px;
-    margin-bottom: 13px;
+    margin-top: 12px;
+    margin-left: 10px;
 }
 
 .interestedButtons{
-    margin-top:42px;
+    margin-top: 12px;
 }
 
 
@@ -216,6 +217,9 @@ ul{
 	border: black;
 }
 
+.sideNav{
+	display: none;
+}
 
 select {
 	background-color: lightgrey;
@@ -245,24 +249,25 @@ select {
 
 @media only screen and (max-width:1940px){
     .applyButtons {
-        margin-top: 42px;
-        margin-left: 40px;
-        margin-bottom: 13px;
+        margin-top: 12px;
+		margin-bottom: 3px;
     }
     .interestedButtons{
-        margin-top: 42px;
-        margin-left: 80px;
-    }
+        margin-top: 12px;
+        margin-left: 30px;
+		margin-bottom: 3px;
+	}
 }
 
 @media only screen and (max-width:1577px){
-    .interestedButtons{
-        margin-top: 42px;
-        margin-left: 125px;
-    }
+	.interestedButtons{
+		margin-top: 12px;
+		margin-left: 35px;
+		margin-bottom: 3px;
+	}
 }
 
-@media only screen and (max-width:1000px){
+@media only screen and (max-width:992px){
     .jobPosting p {
         font-size: 20px;
         margin: 0 0 10px 0;
@@ -273,42 +278,66 @@ select {
     .jobPosting span {
         font-size: 15px;
     }
+	.sideNav{
+		display: inline;
+		margin-left: 20px;
+	}
+	.sideNavButton{
+		background: transparent;
+		border: 0;
+		padding: 0;
+		margin: 0;
+		height: 63%;
+		width: 85px;
+		line-height: 0;
+		font-size: 15px;
+	}
+
+	.sideNavButton:hover{
+		background: grey;
+	}
 }
-@media only screen and (max-width:616px){
-    .interestedButtons{
-        margin-top: 42px;
-        margin-bottom: 15px;
-        margin-left: 0px;
 
-    }
+@media only screen and (max-width:800px) {
+	.notes{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.editJob{
+		width: 100%;
+		margin:0 0 10px 0;
 
-    .applyButtons {
-        margin-top: 42px;
-        margin-left: 0px;
-        margin-bottom: 13px;
-    }
+	}
 
-    .applyDiv{
-        height: 50px;
-    }
+	.delete{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+
+	.applyButtons{
+		margin: 0;
+	}
+
+	.interestedButtons{
+		margin-top: 4px;
+		margin-bottom: 15px;
+		margin-left: 0px;
+		width: 100%;
+	}
+	.applyButtons {
+		margin-top: 12px;
+		margin-left: 0px;
+		margin-bottom: 13px;
+		width: 100%;
+	}
+
+	.applyDiv{
+		height: auto;
+
+	}
 }
 
-@media only screen and (max-width:500px) {
-    .notes{
-         width: 100%;
-         margin-bottom: 10px;
-     }
-    .editJob{
-        width: 100%;
-        margin:0 0 10px 0;
 
-    }
-
-    .delete{
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}
 
 
 

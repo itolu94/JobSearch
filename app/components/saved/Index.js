@@ -33,7 +33,10 @@ export default class ModalAndSavedJobs extends Component {
             content: 'notes',
             currentJob: '',
             index: '',
-            organize: 'Date'
+            organize: 'Date',
+            page: 1,
+            morePages: true,
+            nextPage: true,
 
         };
         this.openModal = this.openModal.bind(this);
@@ -49,6 +52,7 @@ export default class ModalAndSavedJobs extends Component {
         this.setIndex = this.setIndex.bind(this);
         this.updateJob = this.updateJob.bind(this);
         this.organizeBy = this.organizeBy.bind(this);
+        this.changePage =  this.changePage.bind(this);
     }
 
     openModal(notes, id) {
@@ -76,6 +80,24 @@ export default class ModalAndSavedJobs extends Component {
         });
     }
 
+    changePage(page){
+        let organizeBy = this.state.organize;
+        axios.get('/api/saved-jobs',
+            {
+                params: {
+                    organizeBy,
+                    page
+                }
+            }).then((response) => {
+            if (response.data.status === 'err') {
+                console.log(response.data.err);
+            }
+            this.setState({
+                jobs: response.data.status,
+                notes: response.data.status.userNotes
+            });
+        });
+    }
     afterOpenModal() {
         // references are now sync'd and can be accessed. 
         this.subtitle.style.color = 'black';
@@ -131,20 +153,24 @@ export default class ModalAndSavedJobs extends Component {
 
     }
 
+    //TODO was used for job form.. Determine if func. can be deleted
     getJobs(organize) {
-        let notesObj = {};
-        axios.get('/api/saved-jobs',
-            {
-                params: {organizeBy: organize}
-            }).then((response) => {
-            if (response.data.status === 'err') {
-                console.log(response.data.err);
-            }
-            this.setState({
-                jobs: response.data.status,
-                notes: response.data.status.userNotes
-            });
-        });
+        // let notesObj = {};
+        // axios.get('/api/saved-jobs',
+        //     {
+        //         params: {
+        //             organizeBy: organize,
+        //             page: this.state.page
+        //         }
+        //     }).then((response) => {
+        //     if (response.data.status === 'err') {
+        //         console.log(response.data.err);
+        //     }
+        //     this.setState({
+        //         jobs: response.data.status,
+        //         notes: response.data.status.userNotes
+        //     });
+        // });
     }
 
     addJob() {
@@ -160,7 +186,7 @@ export default class ModalAndSavedJobs extends Component {
         this.openModal();
     }
 
-    updateJob(data) {
+    updateJob() {
         axios.get('/api/saved-jobs').then((response) => {
             // console.log(response);
             if (response.data.status === 'err') {
@@ -192,15 +218,21 @@ export default class ModalAndSavedJobs extends Component {
         axios.get('/api/saved-jobs',
             {
                 params:
-                    {organizeBy: this.state.organize}
+                    {
+                        organizeBy: this.state.organize,
+                        page: this.state.page
+
+                    }
             }).then((response) => {
             // console.log(response);
             if (response.data.status === 'err') {
                 console.log(response.data.err);
             }
+            console.log(response.data);
             this.setState({
                 jobs: response.data.status,
-                notes: response.data.status.userNotes
+                notes: response.data.status.userNotes,
+                morePages: response.data.morePages
             });
         })
             .catch((err) => {
@@ -220,6 +252,9 @@ export default class ModalAndSavedJobs extends Component {
                     editJob={this.editJob}
                     organize={this.state.organize}
                     organizeBy={this.organizeBy}
+                    page={this.state.page}
+                    morePages={this.state.morePages}
+                    changePage={this.changePage}
                 />
                 <div>
                     <Modal isOpen={this.state.modalIsOpen}

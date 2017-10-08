@@ -4,24 +4,90 @@ const Jobs = mongoose.model('Jobs');
 const Notes = mongoose.model('Notes');
 
 
-exports.getSavedJobs = (user, organizeBy, cb) => {
-    if(organizeBy == 'Status'){
-        Jobs.find({user: user}, null, {sort: {status: 1}}).populate('notes').exec((err, jobs) => {
-            if (err) return cb(err, null);
-            return cb(null, jobs);
-        });
-    } else if (organizeBy == 'Title'){
-        Jobs.find({user: user}, null, {sort: {title: 1}}).populate('notes').exec((err, jobs) => {
-            if (err) return cb(err, null);
-            return cb(null, jobs);
-        });
+exports.getSavedJobs = (user, organizeBy, page, cb) => {
+    // console.log(`Being organized by ${organizeBy}`);
+    let skipPages;
+    if (page > 1) {
+        skipPages = page * 4;
     } else {
-        Jobs.find({user: user}, null, {sort: {date: -1}}).populate('notes').exec((err, jobs) => {
-            if (err) return cb(err, null);
-            return cb(null, jobs);
-        });
+        skipPages = 0;
+    }
+    switch (organizeBy) {
+        case "Status": {
+            Jobs.find({user: user}, null, {
+                sort: {status: 1},
+                limit: 5,
+                skip: skipPages
+            }).populate('notes').exec((err, jobs) => {
+                if (err) return cb(err, null);
+                if (jobs.length < 5) {
+                    jobs.morePages = false;
+                    return cb(null, jobs);
+                } else {
+                    jobs.pop();
+                    jobs.morePages = true;
+                    return cb(null, jobs);
+                }
+            });
+            break;
+        }
+        case "Title": {
+            Jobs.find({user: user}, null, {
+                sort: {title: 1},
+                limit: 5,
+                skip: skipPages
+            }).populate('notes').exec((err, jobs) => {
+                if (err) return cb(err, null);
+                if (jobs.length < 5) {
+                    jobs.morePages = false;
+                    return cb(null, jobs);
+                } else {
+                    jobs.pop();
+                    jobs.morePages = true;
+                    return cb(null, jobs);
+                }
+            });
+            break;
+        }
+        case "Date": {
+            Jobs.find({user: user}, null, {
+                sort: {date: -1},
+                limit: 5,
+                skip: skipPages
+            }).populate('notes').exec((err, jobs) => {
+                if (err) return cb(err, null);
+                console.log(jobs.length)
+                if (jobs.length < 5) {
+                    jobs.morePages = false;
+                    return cb(null, jobs);
+                } else {
+                    jobs.pop();
+                    jobs.morePages = true;
+                    return cb(null, jobs);
+                }
+            });
+            break;
+        }
+        default: {
+            Jobs.find({user: user}, null, {
+                sort: {date: -1},
+                limit: 5,
+                skip: skipPages
+            }).populate('notes').exec((err, jobs) => {
+                if (err) return cb(err, null);
+                if (jobs.length < 5) {
+                    jobs.morePages = false;
+                    return cb(null, jobs);
+                } else {
+                    jobs.pop();
+                    jobs.morePages = true;
+                    return cb(null, jobs);
+                }
+            });
+        }
     }
 }
+
 
 exports.addJob = (jobInfo, user, cb) => {
     let {source, jobTitle, company, detailUrl, location, status} = jobInfo;
