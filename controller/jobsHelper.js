@@ -16,8 +16,7 @@ exports.getSavedJobs = (user, organizeBy, page, cb) => {
         case "Status": {
             Jobs.find({user: user}, null, {
                 sort: {status: 1},
-                limit: 5,
-                skip: skipPages
+                limit: 50,
             }).populate('notes').exec((err, jobs) => {
                 if (err) return cb(err, null);
                 if (jobs.length < 5) {
@@ -34,8 +33,7 @@ exports.getSavedJobs = (user, organizeBy, page, cb) => {
         case "Title": {
             Jobs.find({user: user}, null, {
                 sort: {title: 1},
-                limit: 5,
-                skip: skipPages
+                limit: 50,
             }).populate('notes').exec((err, jobs) => {
                 if (err) return cb(err, null);
                 if (jobs.length < 5) {
@@ -52,8 +50,7 @@ exports.getSavedJobs = (user, organizeBy, page, cb) => {
         case "Date": {
             Jobs.find({user: user}, null, {
                 sort: {date: -1},
-                limit: 5,
-                skip: skipPages
+                limit: 50,
             }).populate('notes').exec((err, jobs) => {
                 if (err) return cb(err, null);
                 console.log(jobs.length)
@@ -71,8 +68,7 @@ exports.getSavedJobs = (user, organizeBy, page, cb) => {
         default: {
             Jobs.find({user: user}, null, {
                 sort: {date: -1},
-                limit: 5,
-                skip: skipPages
+                limit: 50,
             }).populate('notes').exec((err, jobs) => {
                 if (err) return cb(err, null);
                 if (jobs.length < 5) {

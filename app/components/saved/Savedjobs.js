@@ -64,9 +64,9 @@ export default class SavedJobs extends Component {
                             <option value='Status'> Status</option>
                         </select>
                     </div>
-                    {this.pagination()}
+                    {/*{this.pagination()}*/}
                     {this.makeComponentJob()}
-                    {this.pagination()}
+                    {/*{this.pagination()}*/}
                 </div>
             </div>
         )
