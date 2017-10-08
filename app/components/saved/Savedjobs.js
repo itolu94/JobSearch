@@ -14,13 +14,13 @@ export default class SavedJobs extends Component {
     //TODO Continue with this function
     pagination() {
         //TODO return boolean making a request for next page
-            return (
-                <Pagination
-                    page={this.props.page}
-                    morePages={this.props.morePages}
-                    changePage={this.props.changePage}
-                />
-            )
+        return (
+            <Pagination
+                page={this.props.page}
+                morePages={this.props.morePages}
+                changePage={this.props.changePage}
+            />
+        )
     }
 
     makeComponentJob() {
@@ -48,7 +48,6 @@ export default class SavedJobs extends Component {
             );
         }
     }
-
     render() {
         return (
             <div className='container'>

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Dice from './websites/Dice.jsx';
 import CyberCoders from './websites/CyberCoders';
 import ZipRecruiter from './websites/ZipRecruiter';
-import axios from 'axios';
+import axios from 'axios'
+import {Row, Col, Preloader} from 'react-materialize';
 
 
 export default class SearchResults extends Component {
@@ -54,6 +55,7 @@ export default class SearchResults extends Component {
                 job: resp.data,
                 loading: false
             });
+
         })
     }
 
@@ -134,7 +136,12 @@ export default class SearchResults extends Component {
                 <div className='container'>
                     <div>
                         <div className='center-align'>
-                            <img src="images/loading.gif" alt="loading"/>
+                            <Row>
+                                <Col  s={10} >
+                                    <Preloader className="windowLoading" size="large"/>
+                                </Col>
+
+                            </Row>;
                         </div>
                     </div>
                 </div>

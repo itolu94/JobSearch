@@ -19,10 +19,13 @@ let color;
     color = 'black';
 }
   let statusColor = {color};
+    let saveJobsStyle =
+        {"borderRadius": "27px",
+    "paddingLeft":"13px"}
 	return(
 	  <div className="row job">
         <div className="cl l12">
-          <div className="jobPosting">
+          <div  style={saveJobsStyle} className="jobPosting">
             <p>{savedJob.title}</p>
             <ul>
               <li className="company"><span>Company:  </span> {savedJob.company} </li>

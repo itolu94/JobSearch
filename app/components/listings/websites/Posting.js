@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 
 const Posting = ({post, applyToJob, website}) => {
+    let jobPostingStyle = {borderRadius: "29px"};
     return (
         <div className="row posting">
             <div className="cl l12">
-                <div className=" row jobPosting">
+                <div style={jobPostingStyle} className=" row jobPosting">
                     <div className="jobInfo">
                         <p>{post.jobTitle}</p>
                         <ul>

@@ -29,7 +29,6 @@ export default class CyberCoders extends Component
         if (currentPage == 1 && savedJobs.length == 21) {
             return (
                     <div>
-                        <h1 className='center-align page-title'>Listings</h1>
                         <ul className="pagination center-align">
                             <li className="active"><a>{currentPage}</a></li>
                             <li className="waves-effect"><a
@@ -48,7 +47,6 @@ export default class CyberCoders extends Component
         } else if (currentPage == 1 && savedJobs.length < 21) {
             return (
                     <div>
-                        <h1 className='center-align page-title'>Listings</h1>
                         <ul className="pagination center-align">
                             <li className="active"><a>{currentPage}</a></li>
                         </ul>
@@ -79,7 +77,6 @@ export default class CyberCoders extends Component
         else {
             return (
                     <div>
-                        <h1 className='center-align page-title'>Listings</h1>
                         <ul className="pagination center-align">
                             <li className="waves-effect"><a
                                 onClick={() => this.props.changePage(previousPage)}>{previousPage}</a></li>
