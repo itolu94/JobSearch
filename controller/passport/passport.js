@@ -28,9 +28,9 @@ module.exports = (passport, port) => {
     }));
 
     passport.use('facebook', new Strategy({
-            clientID: '1871471559835158',
-            clientSecret: '74c218b580baf18eae1b6cbe72d127e6',
-            callbackURL: `https://developerjobsearch.herokuapp.com/facebook/login/return`
+            clientID: process.env.CLIENT_ID || " ",
+            clientSecret: process.env.CLIENT_SECRET || " ",
+            callbackURL: process.env.CALL_BACK_URL || " "
         },
         function (accessToken, refreshToken, profile, cb) {
             if (profile) {
