@@ -9,9 +9,14 @@ exports.getDice = (req, cb) =>{
 	let {title, page, state, city} = req || '';
     let url =`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${title}&pgcnt=7&page=${page}&state=${state}&&city=${city}sort=4`
     axios.get(url).then((response) => {
+		console.log(response);
 		// console.log(response.data.resultItemList);		
 		return cb(response.data.resultItemList);
 	})
+	.catch((err) => {
+		console.log('Function failed');
+		console.log(err)
+	});
 }
 
 exports.getCyberCoders = (req,cb) =>{
