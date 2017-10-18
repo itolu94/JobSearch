@@ -10,7 +10,7 @@ const notesHelper = require ('./../notesHelper');
 module.exports = (app, passport) => {
   app.get('/api/dice', (req, resp) => {
       listings.getDice(req.query, (data) =>{
-        console.log(data);
+        // console.log(data);
         resp.send(data);
       });
   });
