@@ -1,4 +1,4 @@
-# Project Title
+# React-Dice
 
 React-Dice is a web-application that helps developers search for jobs using ZipRecruiter, CyberCoders, and Dice. After creating an account or registering using Facebook, users can search for jobs based on their desired title and location (city and state). Jobs can be saved and the status of the job (applied, interviewing, accepted, etc.) can be modified and personal notes can be attached to the saved job.    
 
