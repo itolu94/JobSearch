@@ -15,7 +15,7 @@ exports.getDice = (req, cb) => {
         if(page <= 1){
             url = `https://www.dice.com/jobs/q-${title}-limit-7-l-${city}%2C_${abbrev}-radius-30-startPage-1-limit-7-jobs?`
         } else {
-            url = `https://www.dice.com/jobs/q-${title}-limit-7-l-${city}%2C_${abbrev}radius-30-startPage-${page}-limit-7-jobs`
+            url = `https://www.dice.com/jobs/q-${title}-limit-7-l-${city}%2C_${abbrev}-radius-30-startPage-${page}-limit-7-jobs`
         }
         console.log(url);
         request(url, (err, resp, html) => {

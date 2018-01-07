@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Notes = require('../model/notes.js');
+const Notes = require('../../model/notes.js');
 const bcrypt = require('bcrypt');
 
 exports.createAccount = (data, cb) => {

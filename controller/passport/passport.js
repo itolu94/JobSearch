@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const Users = require('./../../model/user');
-const passportHelper = require('../passportHelper');
+const passportHelper = require('../helpers/passportHelper');
 const Strategy = require('passport-facebook').Strategy;
 
 

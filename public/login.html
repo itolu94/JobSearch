@@ -33,13 +33,13 @@
         <div class="  col s6 offset-s3 center-align">
             <h3 id='loginHeader'> Login </h3>
             <form method='POST' action="/login">
-                <input class='' type="text" placeholder="Email" name='email'>
+                <input  type="text" placeholder="Email" name='email'>
                 <input type="password" placeholder="Password" name='password'>
                 <button class='waves-effect waves-light btn login-buttons' type="submit"> Log-In</button>
-                <br>
-                <button class="waves-effect waves-light btn login-buttons">
-                    <a style='' href="/signup">Sign Up</a>
-                </button>
+                <br/>
+            </form>
+            <form method="GET" action="/signup">
+                <input type="submit" id="signup" class="waves-effect waves-light btn login-buttons" value="Sign Up" />
             </form>
             <!--TODO add facebook login link-->
             <button class=" btn social-icon">

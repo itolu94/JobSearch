@@ -1,5 +1,5 @@
 const path = require('path');
-const helpers = require('./../passportHelper');
+const helpers = require('../helpers/passportHelper');
 
 module.exports = (app, passport) => {
     app.get('/', (req, res) => {

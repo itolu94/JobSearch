@@ -35,6 +35,11 @@ nav{
 .login-buttons:hover{
 	background: grey;
 }
+
+#signup{
+	color: black;
+}
+
 input{
 	color: white;
 }

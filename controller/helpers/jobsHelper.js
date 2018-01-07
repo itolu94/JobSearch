@@ -98,12 +98,12 @@ exports.addJob = (jobInfo, user, cb) => {
             let saveJob = new Jobs({
                 title: jobTitle,
                 link: detailUrl,
+                notes: notes._id,
                 status,
                 company,
                 location,
                 source,
-                user,
-                notes: notes._id
+                user
             });
 
             saveJob.save((err) => {

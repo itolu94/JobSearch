@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Jobs = mongoose.model('Jobs');
 const Notes = mongoose.model('Notes');
-const listings = require('./../listingsHelper.js');
-const jobsHelper = require ('./../jobsHelper');
-const notesHelper = require ('./../notesHelper');
+const listings = require('../helpers/listingsHelper.js');
+const jobsHelper = require ('../helpers/jobsHelper');
+const notesHelper = require ('../helpers/notesHelper');
 
 
 module.exports = (app, passport) => {
