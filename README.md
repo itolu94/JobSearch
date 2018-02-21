@@ -1,26 +1,18 @@
-# React-Dice
+# JobSearch
 
-React-Dice is a web-application that helps developers search for jobs using ZipRecruiter, CyberCoders, and Dice. After creating an account or registering using Facebook, users can search for jobs based on their desired title and location (city and state). Jobs can be saved and the status of the job (applied, interviewing, accepted, etc.) can be modified and personal notes can be attached to the saved job.    
+JobSearch is a web-application that helps developers search for jobs using ZipRecruiter, CyberCoders, and Dice. After creating an account or registering using Facebook, users can search for jobs based on their desired title and location (city and state). Jobs can be saved and the status of the job (applied, interviewing, accepted, etc.) can be modified and personal notes can be attached to the saved job.    
 
 
 <img src="https://s3.us-east-2.amazonaws.com/github-readme-iamges-ti/job-search.gif"/>
 
 
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
 ### Installing
 
 1. Clone the repository to your local machine. 
 
 ```
-Git clone git@github.com:itolu94/React-Dice.git
+Git clone git@github.com:itolu94/JobSearch.git
 ```
 
 
@@ -32,8 +24,8 @@ npm install
  
 3. Once packages are installed, make sure your MongoDB daemon is running and then start node server.
 ```
-   node server.js
-   ```
+node server.js
+```
 
 ## Built With
 
