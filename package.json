@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -w"
   },
-  "author": "Ahmed Haque",
-  "license": "ISC",
+  "author": "Tolu Idowu",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
     "bcrypt": "^1.0.2",
